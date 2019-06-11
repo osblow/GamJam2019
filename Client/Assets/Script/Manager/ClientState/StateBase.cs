@@ -11,4 +11,9 @@ public class StateBase
     {
 
     }
+
+    public virtual void End()
+    {
+
+    }
 }
