@@ -13,10 +13,10 @@ public class MapNodeManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        m_transMainCanvas = GameObject.Find("Canvas/Main").transform;
+        m_transMainCanvas = GameObject.Find("MainCanvas/Main").transform;
     }
 
-    public MapNode GetHeroNode()
+    public MapNode CreateHeroNode()
     {
         if(m_hero == null)
         {
@@ -24,6 +24,11 @@ public class MapNodeManager : MonoBehaviour
             m_hero = Util.GetOrAddComponent<MapHeroNode>(go);
         }
 
+        return m_hero;
+    }
+
+    public MapNode GetHeroNode()
+    {
         return m_hero;
     }
 }

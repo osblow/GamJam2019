@@ -7,7 +7,7 @@ public class StateWelcome : StateBase
     GameObject m_panel = null;
     public override void Start()
     {
-        Transform transCanvas = GameObject.Find("Canvas/Top").transform;
+        Transform transCanvas = GameObject.Find("UICanvas/Top").transform;
         m_pre = Resources.Load("Prefab/UI/Welcome/WekcomePanel");
         m_panel = GameObject.Instantiate(m_pre, transCanvas) as GameObject;
 

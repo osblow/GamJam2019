@@ -46,7 +46,6 @@ public class MapHeroNode : MapNode
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("OnCollisionEnter");
         m_jumpFlag = 1;
     }
 
@@ -58,7 +57,6 @@ public class MapHeroNode : MapNode
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        Debug.Log("OnCollisionExit");
         m_jumpFlag = 0;
     }
 }

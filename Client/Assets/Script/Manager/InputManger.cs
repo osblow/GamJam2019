@@ -18,10 +18,6 @@ public class InputManger : MonoBehaviour
 
     void Start()
     {
-        RegistMoveDelegate(delegate(Vector3 direction)
-        {
-            Debug.Log("move---->>"+ direction);
-        });
 
     }
 

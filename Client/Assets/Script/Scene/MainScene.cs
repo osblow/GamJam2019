@@ -10,10 +10,10 @@ public class MainScene:SceneBase
 
     public override void Init()
     {
-        m_transMainCanvas = GameObject.Find("Canvas/Main").transform;
+        m_transMainCanvas = GameObject.Find("MainCanvas/Main").transform;
         m_scene = GameObject.Instantiate(Resources.Load("Prefab/Scene/SceneTest"), m_transMainCanvas) as GameObject;
 
-        MapNode m_hero = MapNodeManager.Instance.GetHeroNode();
+        MapNode m_hero = MapNodeManager.Instance.CreateHeroNode();
     }
 
     public override void Run()

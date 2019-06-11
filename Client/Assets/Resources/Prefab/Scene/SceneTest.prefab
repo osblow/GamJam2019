@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 145942406444072149}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: SceneTest
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 145942406640862493}
   - component: {fileID: 145942406640862492}
   - component: {fileID: 145942406640862491}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 7285573037283853649}
   - component: {fileID: 1078702913906164781}
   - component: {fileID: 8672843375513648654}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Ground1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
