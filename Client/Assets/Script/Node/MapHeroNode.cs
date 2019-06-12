@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapHeroNode : MapNode
 {
@@ -18,22 +19,29 @@ public class MapHeroNode : MapNode
         m_animPlayer = Util.GetOrAddComponent<AnimationPlayer>(gameObject);
         InitController();
         InitAnimation();
+        InitAttack();
     }
 
 
     void Update()
     {
+        SpeedLimit();
+        UpdateAnimation();
+        UpdateRotation();
+    }
+
+    void SpeedLimit()
+    {
         //限制移动速度
-        if(Mathf.Abs(m_rigidbody.velocity.x) >= m_maxMoveSpeed)
+        if (Mathf.Abs(m_rigidbody.velocity.x) >= m_maxMoveSpeed)
         {
             m_rigidbody.velocity = new Vector2(Mathf.Sign(m_rigidbody.velocity.x) * m_maxMoveSpeed, m_rigidbody.velocity.y);
         }
 
-        if(Mathf.Abs(m_rigidbody.velocity.y) >= m_maxJumpSpeed)
+        if (Mathf.Abs(m_rigidbody.velocity.y) >= m_maxJumpSpeed)
         {
             m_rigidbody.velocity = new Vector2(m_rigidbody.velocity.x, Mathf.Sign(m_rigidbody.velocity.y) * m_maxJumpSpeed);
         }
-        UpdateAnimation();
     }
 
     void UpdateAnimation()
@@ -44,21 +52,24 @@ public class MapHeroNode : MapNode
         }
         else if (Mathf.Abs(m_rigidbody.velocity.x) > 0)
         {
-            if (Mathf.Sign(m_rigidbody.velocity.x) < 0)
-            {
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-            }else
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
             m_animPlayer.Play(AnimationData.DATA["hero_run"]);
         }
         else
         {
             m_animPlayer.Play(AnimationData.DATA["hero_idle"]);
-        }
+        }  
+    }
 
-        
+    void UpdateRotation()
+    {
+        if (Mathf.Sign(m_rigidbody.velocity.x) < 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
     }
 
     void InitController()
@@ -91,5 +102,28 @@ public class MapHeroNode : MapNode
     void OnCollisionExit2D(Collision2D collision)
     {
         m_jumpFlag = 0;
+    }
+
+    void InitAttack()
+    {
+        InputManger.Instance.RegistClickDelegate(delegate (Vector2 clickPosition)
+        {
+            MapLaserNode laser = MapNodeManager.Instance.CreateNode<MapLaserNode>("Prefab/Bullet/Laser", transform.parent);
+            laser.Init(transform.position, transform.parent.TransformPoint(clickPosition));
+            //RaycastHit2D hit = Physics2D.Raycast(transform.localPosition, clickPosition);
+
+            //LineRenderer lr = GameObject.Find("MainCanvas/Main/line").GetComponent<LineRenderer>();
+            //GameObject img = GameObject.Find("MainCanvas/Main/line");
+            //img.transform.localPosition = clickPosition;
+
+            //lr.positionCount = 2;
+            //lr.SetPosition(0, transform.position);
+            //lr.SetPosition(1, transform.parent.TransformPoint(clickPosition));
+            //if (hit.collider.tag == "Player" )
+            //{                
+            //    //DOSTH            
+            //}
+
+        });
     }
 }

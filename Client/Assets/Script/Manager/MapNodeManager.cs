@@ -31,4 +31,21 @@ public class MapNodeManager : MonoBehaviour
     {
         return m_hero;
     }
+
+    public T CreateNode<T>(string path,Transform parent = null) where T:MapNode
+    {
+        GameObject go;
+        if (parent)
+        {
+            go = GameObject.Instantiate(Resources.Load(path), parent) as GameObject;
+        }
+        else
+        {
+            go = GameObject.Instantiate(Resources.Load(path)) as GameObject;
+        }
+
+        T node = Util.GetOrAddComponent<T>(go);
+
+        return node;
+    }
 }
