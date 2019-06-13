@@ -13,15 +13,16 @@ public class AnimationPlayer : MonoBehaviour
     private int ticked;
     private float time;
     private bool doAnim;
+    private int frameLock = -1;
 
     private void Awake()
     {
         container = GetComponent<Image>();
     }
 
-    public void Play(AnimationInfo info,bool replay = false)
+    public void Play(AnimationInfo info, bool replay = false)
     {
-        if(curInfo == info && !replay)
+        if (curInfo == info && !replay)
         {
             return;
         }
@@ -33,6 +34,36 @@ public class AnimationPlayer : MonoBehaviour
         speed = info.duration / (info.endFrame - info.startFrame + 1);
         doAnim = true;
         container.sprite = frames[info.startFrame];
+
+        if (info.soundName != "")
+        {
+            AudioManager.Instance.PlaySoundByGO(AudioData.DATA[info.soundName],gameObject);
+        }
+        else
+        {
+            AudioManager.Instance.StopSoundByGO(gameObject);
+        }
+    }
+
+    //固定再某一帧
+    public void PlayOneFrame(AnimationInfo info, int tick, bool needSound = false)
+    {
+        if (tick < info.startFrame || tick > info.endFrame)
+        {
+            return;
+        }
+        Stop();
+        frames = Resources.LoadAll<Sprite>(info.resName);
+        container.sprite = frames[tick];
+
+        if (needSound && info.soundName != "")
+        {
+            AudioManager.Instance.PlaySoundByGO(AudioData.DATA[info.soundName], gameObject);
+        }
+        else
+        {
+            AudioManager.Instance.StopSoundByGO(gameObject);
+        }
     }
 
     public void Pause()
@@ -49,6 +80,7 @@ public class AnimationPlayer : MonoBehaviour
     {
         time = 0;
         doAnim = false;
+        frameLock = -1;
         //container.sprite = frames[0];
     }
 

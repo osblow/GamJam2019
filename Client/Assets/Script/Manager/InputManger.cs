@@ -81,7 +81,7 @@ public class InputManger : MonoBehaviour
         {
             direction.x = 1;
         }
-        if (direction != Vector3.zero)
+        if (direction != Vector3.zero && m_moveDelegate != null)
         {
             m_moveDelegate(direction);
         }

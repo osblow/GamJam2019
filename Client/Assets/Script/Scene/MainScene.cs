@@ -14,6 +14,8 @@ public class MainScene:SceneBase
         m_scene = GameObject.Instantiate(Resources.Load("Prefab/Scene/SceneTest"), m_transMainCanvas) as GameObject;
 
         MapNode m_hero = MapNodeManager.Instance.CreateHeroNode();
+
+        AudioManager.Instance.PlayBGM(AudioData.DATA["bg_1"]);
     }
 
     public override void Run()

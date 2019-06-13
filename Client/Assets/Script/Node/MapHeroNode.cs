@@ -48,7 +48,14 @@ public class MapHeroNode : MapNode
     {
         if (Mathf.Abs(m_rigidbody.velocity.y) > 0)
         {
-            m_animPlayer.Play(AnimationData.DATA["hero_jump"]);
+            if(m_rigidbody.velocity.y > 0)
+            {
+                m_animPlayer.Play(AnimationData.DATA["hero_jump"]);
+            }
+            else
+            {
+                m_animPlayer.PlayOneFrame(AnimationData.DATA["hero_jump"], AnimationData.DATA["hero_jump"].endFrame);
+            }
         }
         else if (Mathf.Abs(m_rigidbody.velocity.x) > 0)
         {

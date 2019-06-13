@@ -10,8 +10,9 @@ public class AnimationInfo
     public int endFrame;
     public float duration;
     public bool loop;
+    public string soundName;
 
-    public AnimationInfo(string animName,string res,int start,int end, float time, bool isloop = false)
+    public AnimationInfo(string animName,string res,int start,int end, float time, bool isloop = false,string sound = "")
     {
         animationName = animName;
         resName = res;
@@ -19,6 +20,7 @@ public class AnimationInfo
         endFrame = end;
         loop = isloop;
         duration = time;
+        soundName = sound;
     }
 }
 
@@ -26,8 +28,8 @@ public class AnimationData
 {
     public static Dictionary<string, AnimationInfo> DATA = new Dictionary<string, AnimationInfo>{
         { "hero_idle",new AnimationInfo("hero_idle","Sprite/Character/test01",0,5,1.5f,true) },
-        { "hero_run",new AnimationInfo("hero_idle","Sprite/Character/test01",6,11,1.0f,true) },
-        { "hero_jump",new AnimationInfo("hero_jump","Sprite/Character/test02",0,10,0.3f) },
+        { "hero_run",new AnimationInfo("hero_idle","Sprite/Character/test01",6,11,1.0f,true,"hero_run") },
+        { "hero_jump",new AnimationInfo("hero_jump","Sprite/Character/test02",0,10,0.3f,false,"hero_jump") },
     };
 }
 
