@@ -109,20 +109,16 @@ public class MapHeroNode : MapNode
         InputManger.Instance.RegistClickDelegate(delegate (Vector2 clickPosition)
         {
             MapLaserNode laser = MapNodeManager.Instance.CreateNode<MapLaserNode>("Prefab/Bullet/Laser", transform.parent);
-            laser.Init(transform.position, transform.parent.TransformPoint(clickPosition));
-            //RaycastHit2D hit = Physics2D.Raycast(transform.localPosition, clickPosition);
 
-            //LineRenderer lr = GameObject.Find("MainCanvas/Main/line").GetComponent<LineRenderer>();
-            //GameObject img = GameObject.Find("MainCanvas/Main/line");
-            //img.transform.localPosition = clickPosition;
-
-            //lr.positionCount = 2;
-            //lr.SetPosition(0, transform.position);
-            //lr.SetPosition(1, transform.parent.TransformPoint(clickPosition));
-            //if (hit.collider.tag == "Player" )
-            //{                
-            //    //DOSTH            
-            //}
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.parent.TransformPoint(clickPosition) - transform.position, 10000f,1<< LayerMask.NameToLayer("Scene"));
+            if(hit.collider != null)
+            {
+                laser.Init(transform.position, hit.point);
+            }
+            else
+            {
+                laser.Init(transform.position, transform.parent.TransformPoint(clickPosition));
+            }
 
         });
     }

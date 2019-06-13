@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputManger : MonoBehaviour
 {
@@ -109,9 +110,35 @@ public class InputManger : MonoBehaviour
         {
 
         }
-        if (m_clickDelegate != null && click == true)
+        if (m_clickDelegate != null && click == true && !IsPointerOverUIObject())
         {
             m_clickDelegate(vecMouse);
         }
+    }
+
+    //判断是否点击在UI上
+    public bool IsPointerOverUIObject()
+    {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            //实例化点击事件
+            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+            //将点击位置的屏幕坐标赋值给点击事件
+            eventDataCurrentPosition.position = Input.mousePosition;
+
+            List<RaycastResult> results = new List<RaycastResult>();
+            //向点击处发射射线
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+
+            foreach (RaycastResult res in results)
+            {
+                if (res.gameObject.layer == LayerMask.NameToLayer("UI"))
+                {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
     }
 }
