@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MapHeroNode : MapNode
+public class MapHeroNode : MapLifeNode
 {
     public float m_maxMoveSpeed = 2.5f;
     public float m_maxJumpSpeed = 8f;
@@ -17,6 +17,10 @@ public class MapHeroNode : MapNode
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
         m_animPlayer = Util.GetOrAddComponent<AnimationPlayer>(gameObject);
+
+        CurHP = 100;
+        MaxHP = 100;
+
         InitController();
         InitAnimation();
         InitAttack();
@@ -97,7 +101,10 @@ public class MapHeroNode : MapNode
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        m_jumpFlag = 1;
+        if (collision.otherCollider.gameObject.name == "Foot")
+        {
+            m_jumpFlag = 1;
+        }
     }
 
     //void OnCollisionStay2D(Collision2D collision)
@@ -108,7 +115,10 @@ public class MapHeroNode : MapNode
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        m_jumpFlag = 0;
+        if (collision.otherCollider.gameObject.name == "Foot")
+        {
+            m_jumpFlag = 0;
+        }
     }
 
     void InitAttack()

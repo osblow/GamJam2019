@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MapEnemyNode : MapNode
+public class MapEnemyNode : MapLifeNode
 {
     public float m_maxMoveSpeed = 2.5f;
     public float m_maxJumpSpeed = 8f;
@@ -16,6 +16,9 @@ public class MapEnemyNode : MapNode
     void Start()
     {
         m_animPlayer = Util.GetOrAddComponent<AnimationPlayer>(gameObject);
+
+        CurHP = 100;
+        MaxHP = 100;
 
         InitAnimation();
         InitAttack();
