@@ -2,3 +2,7 @@
 Client/Library/*
 Client/Logs/*
 Client/Temp/*
+Client/.vs/*
+*.csproj
+Client/obj/*
+*.sln
