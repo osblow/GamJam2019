@@ -12,11 +12,13 @@ public class MapHeroNode : MapLifeNode
     int m_jumpFlag = 1;  //弹跳标志符
     Rigidbody2D m_rigidbody;
     AnimationPlayer m_animPlayer;
+    UIHanger m_UIHanger;
 
     void Start()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
         m_animPlayer = Util.GetOrAddComponent<AnimationPlayer>(gameObject);
+        m_UIHanger = Util.GetOrAddComponent<UIHanger>(gameObject);
 
         CurHP = 100;
         MaxHP = 100;
@@ -24,6 +26,9 @@ public class MapHeroNode : MapLifeNode
         InitController();
         InitAnimation();
         InitAttack();
+
+        m_UIHanger.Init(transform.Find("Head").gameObject);
+        m_UIHanger.SetName("Hero");
     }
 
 
@@ -86,12 +91,14 @@ public class MapHeroNode : MapLifeNode
     void InitController()
     {
         m_rigidbody.freezeRotation = true;
-        InputManger.Instance.RegistMoveDelegate(delegate (Vector3 direction)
-        {
-            //transform.Translate(direction * m_speed * Time.deltaTime);
-            //m_rigidbody.MovePosition(m_rigidbody.position + new Vector2(direction.x * m_move_speed, direction.y * m_jump_speed * m_jump_flag)* Time.deltaTime);
-            m_rigidbody.AddForce(new Vector2(direction.x * m_moveSpeed, direction.y * m_jumpSpeed * m_jumpFlag));
-        });
+        InputManger.Instance.RegistMoveDelegate(Move);
+    }
+
+    void Move(Vector3 direction)
+    {
+        //transform.Translate(direction * m_speed * Time.deltaTime);
+        //m_rigidbody.MovePosition(m_rigidbody.position + new Vector2(direction.x * m_move_speed, direction.y * m_jump_speed * m_jump_flag)* Time.deltaTime);
+        m_rigidbody.AddForce(new Vector2(direction.x * m_moveSpeed, direction.y * m_jumpSpeed * m_jumpFlag));
     }
 
     void InitAnimation()
@@ -123,20 +130,27 @@ public class MapHeroNode : MapLifeNode
 
     void InitAttack()
     {
-        InputManger.Instance.RegistClickDelegate(delegate (Vector2 clickPosition)
+        InputManger.Instance.RegistClickDelegate(Attack);
+    }
+
+    void Attack(Vector2 clickPosition)
+    {
+        MapLaserNode laser = MapNodeManager.Instance.CreateNode<MapLaserNode>("Prefab/Bullet/Laser", transform.parent);
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.parent.TransformPoint(clickPosition) - transform.position, 10000f, 1 << LayerMask.NameToLayer("Scene"));
+        if (hit.collider != null)
         {
-            MapLaserNode laser = MapNodeManager.Instance.CreateNode<MapLaserNode>("Prefab/Bullet/Laser", transform.parent);
+            laser.Init(transform.position, hit.point);
+        }
+        else
+        {
+            laser.Init(transform.position, transform.parent.TransformPoint(clickPosition));
+        }
+    }
 
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.parent.TransformPoint(clickPosition) - transform.position, 10000f,1<< LayerMask.NameToLayer("Scene"));
-            if(hit.collider != null)
-            {
-                laser.Init(transform.position, hit.point);
-            }
-            else
-            {
-                laser.Init(transform.position, transform.parent.TransformPoint(clickPosition));
-            }
-
-        });
+    void OnDestroy()
+    {
+        InputManger.Instance.UnRegistClickDelegate(Attack);
+        InputManger.Instance.UnRegistMoveDelegate(Move);
     }
 }

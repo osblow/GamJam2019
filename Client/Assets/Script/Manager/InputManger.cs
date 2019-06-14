@@ -41,9 +41,19 @@ public class InputManger : MonoBehaviour
         m_moveDelegate += moveDel;
     }
 
+    public void UnRegistMoveDelegate(MoveDelegate moveDel)
+    {
+        m_moveDelegate -= moveDel;
+    }
+
     public void RegistClickDelegate(ClickDelegate clickDel)
     {
         m_clickDelegate += clickDel;
+    }
+
+    public void UnRegistClickDelegate(ClickDelegate clickDel)
+    {
+        m_clickDelegate -= clickDel;
     }
 
     //Translate移动控制函数
