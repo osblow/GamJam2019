@@ -15,8 +15,6 @@ public class MainScene:SceneBase
 
         MapNode m_hero = MapNodeManager.Instance.CreateHeroNode();
 
-        MapNode m_enemy = MapNodeManager.Instance.CreateNode<MapEnemyNode>("Prefab/Character/Enemy", m_transMainCanvas.transform);
-
         AudioManager.Instance.PlayBGM(AudioData.DATA["bg_1"]);
     }
 

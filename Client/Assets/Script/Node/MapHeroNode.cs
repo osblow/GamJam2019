@@ -5,11 +5,19 @@ using UnityEngine.UI;
 
 public class MapHeroNode : MapLifeNode
 {
-    public float m_maxMoveSpeed = 2.5f;
-    public float m_maxJumpSpeed = 8f;
+    enum MotionState
+    {
+        Idle,
+        Run,
+        Climb,
+        Operate,
+    }
+
     public float m_moveSpeed = 5f;
-    public float m_jumpSpeed = 500f;
-    int m_jumpFlag = 1;  //弹跳标志符
+    MotionState m_motionState = MotionState.Idle;
+
+    Vector2 m_target_pos = Vector2.zero;
+
     Rigidbody2D m_rigidbody;
     AnimationPlayer m_animPlayer;
     UIHanger m_UIHanger;
@@ -34,71 +42,67 @@ public class MapHeroNode : MapLifeNode
 
     void Update()
     {
-        SpeedLimit();
+        CheckMove();
+
         UpdateAnimation();
-        UpdateRotation();
     }
 
-    void SpeedLimit()
+    void CheckMove()
     {
-        //限制移动速度
-        if (Mathf.Abs(m_rigidbody.velocity.x) >= m_maxMoveSpeed)
+        if(m_target_pos != Vector2.zero)
         {
-            m_rigidbody.velocity = new Vector2(Mathf.Sign(m_rigidbody.velocity.x) * m_maxMoveSpeed, m_rigidbody.velocity.y);
-        }
+            Vector3 mouse_pos = transform.parent.TransformPoint(m_target_pos);
+            Vector2 direction = new Vector2(mouse_pos.x, mouse_pos.y) - new Vector2(transform.position.x,transform.position.y);
+            float distance = Mathf.Abs(direction.x);
+            if(distance > 0.1)
+            {
+                direction = direction.normalized;
 
-        if (Mathf.Abs(m_rigidbody.velocity.y) >= m_maxJumpSpeed)
+                if (Mathf.Sign(direction.x) < 0)
+                {
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                }
+                transform.Translate(new Vector2(Mathf.Sign(direction.x)* direction.x, 0) * m_moveSpeed * Time.deltaTime);
+                m_motionState = MotionState.Run;
+            }
+            else
+            {
+                m_target_pos = Vector2.zero;
+                m_motionState = MotionState.Idle;
+            }
+        }
+        else
         {
-            m_rigidbody.velocity = new Vector2(m_rigidbody.velocity.x, Mathf.Sign(m_rigidbody.velocity.y) * m_maxJumpSpeed);
+            m_motionState = MotionState.Idle;
         }
     }
 
     void UpdateAnimation()
     {
-        if (Mathf.Abs(m_rigidbody.velocity.y) > 0)
-        {
-            if(m_rigidbody.velocity.y > 0)
-            {
-                m_animPlayer.Play(AnimationData.DATA["hero_jump"]);
-            }
-            else
-            {
-                m_animPlayer.PlayOneFrame(AnimationData.DATA["hero_jump"], AnimationData.DATA["hero_jump"].endFrame);
-            }
-        }
-        else if (Mathf.Abs(m_rigidbody.velocity.x) > 0)
-        {
-            m_animPlayer.Play(AnimationData.DATA["hero_run"]);
-        }
-        else
+        if(m_motionState == MotionState.Idle)
         {
             m_animPlayer.Play(AnimationData.DATA["hero_idle"]);
-        }  
-    }
-
-    void UpdateRotation()
-    {
-        if (Mathf.Sign(m_rigidbody.velocity.x) < 0)
+        }else if(m_motionState == MotionState.Run)
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            m_animPlayer.Play(AnimationData.DATA["hero_run"]);
         }
     }
 
     void InitController()
     {
         m_rigidbody.freezeRotation = true;
-        InputManger.Instance.RegistMoveDelegate(Move);
+        //InputManger.Instance.RegistMoveDelegate(Move);
     }
 
     void Move(Vector3 direction)
     {
-        //transform.Translate(direction * m_speed * Time.deltaTime);
+        //transform.Translate(direction * m_moveSpeed * Time.deltaTime);
         //m_rigidbody.MovePosition(m_rigidbody.position + new Vector2(direction.x * m_move_speed, direction.y * m_jump_speed * m_jump_flag)* Time.deltaTime);
-        m_rigidbody.AddForce(new Vector2(direction.x * m_moveSpeed, direction.y * m_jumpSpeed * m_jumpFlag));
+        //m_rigidbody.AddForce(new Vector2(direction.x * m_moveSpeed, direction.y * m_jumpSpeed * m_jumpFlag));
     }
 
     void InitAnimation()
@@ -108,10 +112,7 @@ public class MapHeroNode : MapLifeNode
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.otherCollider.gameObject.name == "Foot")
-        {
-            m_jumpFlag = 1;
-        }
+        
     }
 
     //void OnCollisionStay2D(Collision2D collision)
@@ -122,35 +123,34 @@ public class MapHeroNode : MapLifeNode
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.otherCollider.gameObject.name == "Foot")
-        {
-            m_jumpFlag = 0;
-        }
+        
     }
 
     void InitAttack()
     {
-        InputManger.Instance.RegistClickDelegate(Attack);
+        InputManger.Instance.RegistClickDelegate(OnMouseClick);
     }
 
-    void Attack(Vector2 clickPosition)
+    void OnMouseClick(Vector2 clickPosition)
     {
+        m_target_pos = clickPosition;
+        //激光指示，最后去掉
         MapLaserNode laser = MapNodeManager.Instance.CreateNode<MapLaserNode>("Prefab/Bullet/Laser", transform.parent);
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.parent.TransformPoint(clickPosition) - transform.position, 10000f, 1 << LayerMask.NameToLayer("Scene"));
-        if (hit.collider != null)
-        {
-            laser.Init(transform.position, hit.point);
-        }
-        else
-        {
-            laser.Init(transform.position, transform.parent.TransformPoint(clickPosition));
-        }
+        laser.Init(transform.position, transform.parent.TransformPoint(clickPosition));
+        //RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.parent.TransformPoint(clickPosition) - transform.position, 10000f, 1 << LayerMask.NameToLayer("Scene"));
+        //if (hit.collider != null)
+        //{
+        //    laser.Init(transform.position, hit.point);
+        //}
+        //else
+        //{
+        //    laser.Init(transform.position, transform.parent.TransformPoint(clickPosition));
+        //}
     }
 
     void OnDestroy()
     {
-        InputManger.Instance.UnRegistClickDelegate(Attack);
-        InputManger.Instance.UnRegistMoveDelegate(Move);
+        InputManger.Instance.UnRegistClickDelegate(OnMouseClick);
+        //InputManger.Instance.UnRegistMoveDelegate(Move);
     }
 }
