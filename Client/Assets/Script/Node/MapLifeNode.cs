@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class MapLifeNode : MapNode
 {
+    protected enum MotionState
+    {
+        Idle,
+        Run,
+        Climb,
+        Operate,
+        Die,
+    }
+
     private int m_curHP = 1;
     private int m_maxHP = 1;
 
@@ -40,4 +49,5 @@ public class MapLifeNode : MapNode
             m_maxHP = value;
         }
     }
+
 }

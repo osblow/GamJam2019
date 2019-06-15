@@ -1,0 +1,154 @@
+fileFormatVersion: 2
+guid: 4bac26964e340a34f83d9fba7a51455d
+timeCreated: 1502939919
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: faucetAGeo
+    100002: faucetBGeo
+    100004: faucetCGeo
+    100006: loudspeakerGeoL
+    100008: loudspeakerGeoR
+    100010: loudspeakerGP
+    100012: pushButtonAGeo
+    100014: pushButtonBGeo
+    100016: pushButtonCGeo
+    100018: pushButtonDGeo
+    100020: pushButtonEGeo
+    100022: pushButtonFGeo
+    100024: pushButtonGGeo
+    100026: pushButtonGP
+    100028: screenGeo
+    100030: //RootNode
+    100032: tvGeo
+    400000: faucetAGeo
+    400002: faucetBGeo
+    400004: faucetCGeo
+    400006: loudspeakerGeoL
+    400008: loudspeakerGeoR
+    400010: loudspeakerGP
+    400012: pushButtonAGeo
+    400014: pushButtonBGeo
+    400016: pushButtonCGeo
+    400018: pushButtonDGeo
+    400020: pushButtonEGeo
+    400022: pushButtonFGeo
+    400024: pushButtonGGeo
+    400026: pushButtonGP
+    400028: screenGeo
+    400030: //RootNode
+    400032: tvGeo
+    2300000: faucetAGeo
+    2300002: faucetBGeo
+    2300004: faucetCGeo
+    2300006: loudspeakerGeoL
+    2300008: loudspeakerGeoR
+    2300010: pushButtonAGeo
+    2300012: pushButtonBGeo
+    2300014: pushButtonCGeo
+    2300016: pushButtonDGeo
+    2300018: pushButtonEGeo
+    2300020: pushButtonFGeo
+    2300022: pushButtonGGeo
+    2300024: screenGeo
+    2300026: tvGeo
+    3300000: faucetAGeo
+    3300002: faucetBGeo
+    3300004: faucetCGeo
+    3300006: loudspeakerGeoL
+    3300008: loudspeakerGeoR
+    3300010: pushButtonAGeo
+    3300012: pushButtonBGeo
+    3300014: pushButtonCGeo
+    3300016: pushButtonDGeo
+    3300018: pushButtonEGeo
+    3300020: pushButtonFGeo
+    3300022: pushButtonGGeo
+    3300024: screenGeo
+    3300026: tvGeo
+    4300000: loudspeakerGeoL
+    4300002: loudspeakerGeoR
+    4300004: pushButtonAGeo
+    4300006: pushButtonBGeo
+    4300008: pushButtonCGeo
+    4300010: pushButtonDGeo
+    4300012: pushButtonEGeo
+    4300014: pushButtonFGeo
+    4300016: pushButtonGGeo
+    4300018: tvGeo
+    4300020: screenGeo
+    4300022: faucetAGeo
+    4300024: faucetBGeo
+    4300026: faucetCGeo
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 20
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
