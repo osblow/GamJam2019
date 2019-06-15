@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class MainScene:SceneBase
 {
-    enum Stage
+    public enum Stage
     {
-        Start,//女主被出撞死的状态
+        Start = 1,//女主被出撞死的状态
         Stage1,//阻止老鼠拨成红灯后，女主被砸死的状态
         Stage2,//用消防栓拦住汽车，女主成功过马路后，两车相撞的状态
         GoodEnd,//主角阻止辆车相撞牺牲，结束循环
     }
 
+    public Stage TargetStage = 0;
     Stage m_curStage = Stage.Start;
+
     float timer = 0;
     Dictionary<Stage, float> m_dicStageTime = new Dictionary<Stage, float>()
     {

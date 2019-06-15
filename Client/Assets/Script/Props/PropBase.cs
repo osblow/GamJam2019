@@ -66,6 +66,13 @@ public class PropBase : MonoBehaviour
             AssociatedObj.GetComponent<Image>().sprite = spr;
         }
 
+        // 执行动作
+        PropAction action = PropData.GetData<PropAction>("used_action");
+        if(action.Action != null)
+        {
+            action.Action();
+        }
+
         m_isUsing = false;
     }
 

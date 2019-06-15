@@ -57,11 +57,17 @@ public class Inventory
     }
 
 
-
-    private const string UIPREFAB_PATH = "";
+    private UIInventory UIInventory;
+    private const string UIPREFAB_PATH = "Prefab/UI/Inventory/InventoryView";
     private void InitUI()
     {
-        //Transform UICanvas = GameObject.Find("UICanvas/UI");
+        GameObject UICanvas = GameObject.Find("UICanvas/UI");
 
+        GameObject uiObj = GameObject.Instantiate<GameObject>(Resources.Load(UIPREFAB_PATH) as GameObject);
+        uiObj.transform.SetParent(UICanvas.transform, false);
+        UIInventory = uiObj.AddComponent<UIInventory>();
+
+        // test
+        //UIInventory.AddProp(new PropData(105));
     }
 }

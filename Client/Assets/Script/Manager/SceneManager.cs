@@ -7,6 +7,10 @@ public class SceneManager : MonoBehaviour
 {
     public static SceneManager Instance; //单例
 
+    public SceneBase CurScene
+    {
+        get { return m_curScene; }
+    }
     SceneBase m_curScene = null;
 
     void Awake()

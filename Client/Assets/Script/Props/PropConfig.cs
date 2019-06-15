@@ -18,8 +18,22 @@ public enum PropAnimationType
 }
 
 
+
+struct PropAction
+{
+    public Action Action;
+}
+
 class PropConfig
 {
+    private static void ChangeToStage(MainScene.Stage stage)
+    {
+        UnityEngine.Debug.Log("change state to " + stage);
+        ((MainScene)SceneManager.Instance.CurScene).TargetStage = stage;
+    }
+
+
+
     public static Dictionary<int, Dictionary<string, object>> S_CONFIGS = new Dictionary<int, Dictionary<string, object>>()
     {
         {101, new Dictionary<string, object>(){
@@ -43,9 +57,11 @@ class PropConfig
             {"how_to_get", PropGetAction.SCENE }, // 
             {"anim_type", PropAnimationType.ROTATION },
             {"anim_rot", -160f },
+            {"used_action",  new PropAction{Action=delegate(){ ChangeToStage(MainScene.Stage.Stage1); } } },
         } },
         {105, new Dictionary<string, object>(){
             {"id", "105" },
+            {"icon", "Sprite/Prop/hammer3" },
             {"how_to_get", PropGetAction.SCENE }, // 
             //{"used_icon", "Sprite/Prop/hammer3" }, // 使用结束后替换的图标
             {"associated_obj_used_icon", "Sprite/Prop/hammer3" } // 所关联物体在自己使用结束后替换图标。todo: 序列帧
