@@ -74,7 +74,7 @@ class PropConfig
         // 第一个井盖, 要与第一个撬棍组合
         {202, new Dictionary<string, object>(){
             {"id", "202" },
-            {"used_icon", "" }, // 使用结束后替换的图标（插了撬棍的井盖）
+            {"used_icon", "Sprite/Prop/hammer3" }, // 使用结束后替换的图标（插了撬棍的井盖）
             {"prev_prop", new Dictionary<int, string>(){ {201, ""} } }, // 字符串指向要替换自己的图标或者Prefab路径
             {"how_to_get", PropGetAction.SCENE }, // 
         } },
@@ -95,15 +95,15 @@ class PropConfig
         {205, new Dictionary<string, object>(){
             {"id", "205" },
             {"how_to_get", PropGetAction.SCENE }, // 
-            {"used_icon", "" }, // 使用结束后替换的图标（开关状态转换）
-            {"associated_obj_used_icon", "" } // 所关联物体在自己使用结束后替换图标(地面上的红绿灯)
+            {"used_icon", "Sprite/Prop/hammer3" }, // 使用结束后替换的图标（开关状态转换）
+            {"associated_obj_used_icon", "Sprite/Prop/hammer3" } // 所关联物体在自己使用结束后替换图标(地面上的红绿灯)
         } },
         // 消防栓
         {206, new Dictionary<string, object>(){
             {"id", "206" },
             {"how_to_get", PropGetAction.SCENE }, // 
-            {"used_icon", "" }, // 使用结束后替换的图标（开关状态转换）
-            {"associated_obj_used_icon", "" } // 所关联物体在自己使用结束后替换图标(地面上的红绿灯)
+            {"used_icon", "Sprite/Prop/hammer3" }, // 使用结束后替换的图标（开关状态转换）
+            {"associated_obj_used_icon", "Sprite/Prop/hammer3" } // 所关联物体在自己使用结束后替换图标(地面上的红绿灯)
         } },
         // 路障，应用时有偏移
         {207, new Dictionary<string, object>(){

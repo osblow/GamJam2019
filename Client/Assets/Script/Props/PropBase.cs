@@ -18,7 +18,7 @@ public class PropBase : MonoBehaviour
     protected bool m_isUsing = false; // 正在使用中，不显示使用的图标
     protected bool m_isOver = false; // 已经使用结束，无交互
     
-    public void OnPropBeginUsing()
+    public virtual void OnPropBeginUsing()
     {
         if (m_isUsing) return;
 
@@ -108,7 +108,7 @@ public class PropBase : MonoBehaviour
 
 
 
-    private void Awake()
+    protected virtual void Awake()
     {
         // 初始化数据
         PropData = new PropData(PropId);
