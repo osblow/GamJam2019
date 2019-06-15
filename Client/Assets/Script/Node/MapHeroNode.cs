@@ -5,13 +5,7 @@ using UnityEngine.UI;
 
 public class MapHeroNode : MapLifeNode
 {
-    enum MotionState
-    {
-        Idle,
-        Run,
-        Climb,
-        Operate,
-    }
+    
 
     public float m_moveSpeed = 5f;
     MotionState m_motionState = MotionState.Idle;
