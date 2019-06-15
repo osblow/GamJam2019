@@ -56,6 +56,7 @@ public class MainScene:SceneBase
     //--------------------------------------------------------
     bool m_audioCarHitBody = false;
     bool m_audioCarHitCar = false;
+    bool m_audioTimeStretch = false;
 
     public override void Init()
     {
@@ -91,11 +92,17 @@ public class MainScene:SceneBase
         if (timer > m_dicStageTime[m_curStage]-0.5f)
         {
             m_sceneCamera.transform.GetComponent<ScreenEffect>().enabled = true;
+            if (!m_audioTimeStretch)
+            {
+                AudioManager.Instance.PlaySoundByGO(AudioData.DATA["time_stretch"], m_car2.gameObject);
+                m_audioTimeStretch = true;
+            }     
         }
 
         if (timer> m_dicStageTime[m_curStage])
         {
             ResetScene();
+            m_audioTimeStretch = false;
             m_screenEffectFlag = false;
             m_sceneCamera.transform.GetComponent<ScreenEffect>().enabled = false;
             timer = 0;
