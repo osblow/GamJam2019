@@ -17,6 +17,7 @@ public class MapHeroNode : MapLifeNode
     MotionState m_motionState = MotionState.Idle;
 
     Vector2 m_target_pos = Vector2.zero;
+    Vector2 m_climb_pos = Vector2.zero;
 
     Rigidbody2D m_rigidbody;
     AnimationPlayer m_animPlayer;
@@ -35,8 +36,8 @@ public class MapHeroNode : MapLifeNode
         InitAnimation();
         InitAttack();
 
-        m_UIHanger.Init(transform.Find("Head").gameObject);
-        m_UIHanger.SetName("Hero");
+        //m_UIHanger.Init(transform.Find("Head").gameObject);
+        //m_UIHanger.SetName("Hero");
     }
 
 
@@ -49,6 +50,35 @@ public class MapHeroNode : MapLifeNode
 
     void CheckMove()
     {
+        //爬梯
+        if(m_climb_pos != Vector2.zero)
+        {
+            Vector2 direction = m_climb_pos - new Vector2(transform.position.x, transform.position.y);
+            float distance = Mathf.Abs(direction.y);
+            if (distance > 0.1)
+            {
+                if (Mathf.Sign(direction.y) < 0)
+                {
+                    direction = new Vector2(0,-1);
+                }
+                else
+                {
+                    direction = new Vector2(0, 1);
+                }
+                SetRigidbodyEnable(false);
+                transform.Translate(direction * m_moveSpeed * Time.deltaTime);
+                m_motionState = MotionState.Climb;
+            }
+            else
+            {
+                SetRigidbodyEnable(true);
+                m_climb_pos = Vector2.zero;
+                m_motionState = MotionState.Idle;
+            }
+            return;
+        }
+
+        //移动
         if(m_target_pos != Vector2.zero)
         {
             Vector3 mouse_pos = transform.parent.TransformPoint(m_target_pos);
@@ -81,6 +111,26 @@ public class MapHeroNode : MapLifeNode
         }
     }
 
+    public void Climb(Vector3 startPos, Vector3 endPos)
+    {
+        transform.position = startPos;
+        m_climb_pos = endPos;
+    }
+
+    void SetRigidbodyEnable(bool flag)
+    {
+        if (flag)
+        {
+            transform.GetComponent<BoxCollider2D>().enabled = true;
+            m_rigidbody.gravityScale = 1;
+        }
+        else
+        {
+            transform.GetComponent<BoxCollider2D>().enabled = false;
+            m_rigidbody.gravityScale = 0;
+        }  
+    }
+
     void UpdateAnimation()
     {
         if(m_motionState == MotionState.Idle)
@@ -89,6 +139,9 @@ public class MapHeroNode : MapLifeNode
         }else if(m_motionState == MotionState.Run)
         {
             m_animPlayer.Play(AnimationData.DATA["hero_run"]);
+        }else if(m_motionState == MotionState.Climb)
+        {
+            m_animPlayer.Play(AnimationData.DATA["hero_jump"]);
         }
     }
 
@@ -110,10 +163,10 @@ public class MapHeroNode : MapLifeNode
         m_animPlayer.Play(AnimationData.DATA["hero_idle"]);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-    }
+    //void OnCollisionEnter2D(Collision2D collision)
+    //{
+
+    //}
 
     //void OnCollisionStay2D(Collision2D collision)
     //{
@@ -121,9 +174,36 @@ public class MapHeroNode : MapLifeNode
     //    m_jump_flag = 1;
     //}
 
-    void OnCollisionExit2D(Collision2D collision)
+    //void OnCollisionExit2D(Collision2D collision)
+    //{
+
+    //}
+
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        
+        Debug.Log("OnTriggerEnter2D hero"+ collider.gameObject.name);
+        if(collider.gameObject.tag == "Stairs")
+        {
+            MapStairsNode node = collider.gameObject.transform.parent.GetComponent<MapStairsNode>();
+            node.SetButtonAble(true);
+        }
+        //m_UIHanger.SetAble(true);
+    }
+
+    //void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    
+    //}
+
+    void OnTriggerExit2D(Collider2D collider)
+    {
+        Debug.Log("OnTriggerExit2D hero");
+        if (collider.gameObject.tag == "Stairs")
+        {
+            MapStairsNode node = collider.gameObject.transform.parent.GetComponent<MapStairsNode>();
+            node.SetButtonAble(false);
+        }
+        //m_UIHanger.SetAble(false);
     }
 
     void InitAttack()

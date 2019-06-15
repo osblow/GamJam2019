@@ -38,7 +38,7 @@ public class UIHanger : MonoBehaviour
         }
     }
 
-    public void Init(GameObject node,float offset = 10f)
+    public void Init(GameObject node,string path, float offset = 10f)
     {
         if(m_root == null)
         {
@@ -47,11 +47,16 @@ public class UIHanger : MonoBehaviour
             //Util.GetOrAddComponent<Image>(m_root);
             m_root.transform.localScale = new Vector3(1, 1, 1);
 
-            m_hangObj = GameObject.Instantiate(Resources.Load("Prefab/UI/Hanger/HangerNameBlood"), m_root.transform) as GameObject;
+            m_hangObj = GameObject.Instantiate(Resources.Load(path), m_root.transform) as GameObject;
         }
         m_offset = offset;
         m_node = node;
         m_isInit = true;
+    }
+
+    public void SetAble(bool flag)
+    {
+        m_root.SetActive(flag);
     }
 
     public void SetName(string name)

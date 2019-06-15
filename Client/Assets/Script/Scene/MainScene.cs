@@ -11,7 +11,8 @@ public class MainScene:SceneBase
     public override void Init()
     {
         m_transMainCanvas = GameObject.Find("MainCanvas/Main").transform;
-        m_scene = GameObject.Instantiate(Resources.Load("Prefab/Scene/SceneTest"), m_transMainCanvas) as GameObject;
+        m_scene = GameObject.Find("MainCanvas/Main/Panel1");
+        m_scene.SetActive(true);
 
         MapNode m_hero = MapNodeManager.Instance.CreateHeroNode();
 
