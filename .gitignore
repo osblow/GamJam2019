@@ -6,3 +6,4 @@ Client/.vs/*
 *.csproj
 Client/obj/*
 *.sln
+Client/pc_build/*

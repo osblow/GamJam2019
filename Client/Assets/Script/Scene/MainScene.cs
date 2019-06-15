@@ -165,6 +165,7 @@ public class MainScene:SceneBase
 
         //
         AddCommentory();
+        
 
         if (TargetStage != 0 && m_curStage != TargetStage)
         {
@@ -530,6 +531,10 @@ public class MainScene:SceneBase
                 }
             }
             //todo 和女主离开动画
+
+            // 召唤结束界面
+            ResultView.Instance.gameObject.SetActive(true);
+            ResultView.Instance.SetTips("王子与公主的故事总是大团圆结局。所以你的故事并没有结束...");
         }
 
         if (m_curStage == Stage.GoodEnd)
