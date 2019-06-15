@@ -43,8 +43,9 @@ public class AudioManager : MonoBehaviour
         //这里目标文件处在 Resources/Sounds/目标文件name
         AudioClip clip = Resources.Load<AudioClip>(audio.resName);
         audios.clip = clip;
-        audios.Play();
         audios.loop = audio.loop;
+
+        audios.Play();
     }
 
     public void StopSoundByGO(GameObject go)

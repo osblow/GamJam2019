@@ -53,6 +53,9 @@ public class MainScene:SceneBase
     //--------------------------------------------------------
     bool m_screenEffectFlag = false;
 
+    //--------------------------------------------------------
+    bool m_audioCarHitBody = false;
+    bool m_audioCarHitCar = false;
 
     public override void Init()
     {
@@ -110,6 +113,7 @@ public class MainScene:SceneBase
         {
             m_car.transform.localPosition = m_carStartOrgPos;
             m_girl.Idle();
+            m_audioCarHitBody = false;
         }
 
         if (m_curStage == Stage.Stage1)
@@ -125,6 +129,7 @@ public class MainScene:SceneBase
             m_car2.transform.localPosition = m_car2StartOrgPos;
             m_steel.transform.localPosition = m_steelStartOrgPos;
             m_girl.Idle();
+            m_audioCarHitCar = false;
         }
 
         if (m_curStage == Stage.GoodEnd)
@@ -149,6 +154,11 @@ public class MainScene:SceneBase
             else
             {
                 m_girl.Die();
+                if (!m_audioCarHitBody)
+                {
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_body"], m_car.gameObject);
+                    m_audioCarHitBody = true;
+                }
             }
             
         }
@@ -196,6 +206,14 @@ public class MainScene:SceneBase
                 if (timer > 6)
                 {
                     m_car2.transform.Translate(new Vector2(-1, 0) * 10f * Time.deltaTime);
+                }
+            }
+            else
+            {
+                if (!m_audioCarHitCar)
+                {
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_car"], m_car.gameObject);
+                    m_audioCarHitCar = true;
                 }
             }
 
