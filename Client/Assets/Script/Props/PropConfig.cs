@@ -105,11 +105,13 @@ class PropConfig
         // 第一个撬棍
         {201, new Dictionary<string, object>(){
             {"id", "201" },
+            {"icon", "Sprite/Prop/img_ganggan" },
             {"how_to_get", PropGetAction.INVENTORY }, // 
         } },
         // 第一个井盖, 要与第一个撬棍组合
         {202, new Dictionary<string, object>(){
             {"id", "202" },
+            {"icon", "Sprite/Prop/hammer2" },
             {"used_icon", "Sprite/Prop/hammer3" }, // 使用结束后替换的图标（插了撬棍的井盖）
             {"prev_prop", new Dictionary<int, string>(){ {201, ""} } }, // 字符串指向要替换自己的图标或者Prefab路径
             {"how_to_get", PropGetAction.SCENE }, // 
@@ -117,6 +119,7 @@ class PropConfig
         // 第二个撬棍
         {203, new Dictionary<string, object>(){
             {"id", "203" },
+            {"icon", "Sprite/Prop/img_qiaogun" },
             {"how_to_get", PropGetAction.INVENTORY }, // 
         } },
         // 第二个井盖, 要与第二个撬棍组合
@@ -156,6 +159,7 @@ class PropConfig
         // 扳手
         {208, new Dictionary<string, object>(){
             {"id", "208" },
+            {"icon", "Sprite/Prop/img_banshou" },
             {"how_to_get", PropGetAction.INVENTORY }, // 
         } },
     };
