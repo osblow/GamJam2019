@@ -12,5 +12,7 @@ class InstantProp : PropBase
         base.OnPropEndUsing();
 
         gameObject.SetActive(false);
+        m_uiBtn.SetActive(false);
+        m_isOver = true;
     }
 }

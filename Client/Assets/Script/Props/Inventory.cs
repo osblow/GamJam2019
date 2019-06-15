@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UnityEngine;
 
 
 
@@ -20,7 +18,10 @@ public class Inventory
         }
     }
     private static Inventory s_ins;
-    private Inventory() { }
+    private Inventory()
+    {
+        InitUI();
+    }
 
 
 
@@ -53,5 +54,14 @@ public class Inventory
         }
 
         return null;
+    }
+
+
+
+    private const string UIPREFAB_PATH = "";
+    private void InitUI()
+    {
+        //Transform UICanvas = GameObject.Find("UICanvas/UI");
+
     }
 }
