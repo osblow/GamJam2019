@@ -39,7 +39,7 @@ public class MainScene:SceneBase
 
     GameObject m_scene;
     //--------------------------------------------------------
-    MapNode m_hero;
+    MapHeroNode m_hero;
     Vector2 m_heroStartPos = new Vector2(-510,-166.4f);
 
     //--------------------------------------------------------
@@ -77,7 +77,7 @@ public class MainScene:SceneBase
 
         m_sceneCamera = GameObject.Find("MainCanvas/Main/SceneCamera").GetComponent<Camera>();
 
-        m_hero = MapNodeManager.Instance.CreateHeroNode();
+        m_hero = MapNodeManager.Instance.CreateHeroNode() as MapHeroNode;
         m_hero.transform.SetParent(GameObject.Find("MainCanvas/Main/Panel1/NPC").transform);
         m_hero.transform.localPosition = m_heroStartPos;
 
@@ -247,7 +247,7 @@ public class MainScene:SceneBase
             }
             else
             {
-                //m_girl.Die(); //男主死亡
+                m_hero.Die(); //男主死亡
                 if (!m_audioCarHitBody)
                 {
                     AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_body"], m_car.gameObject);
@@ -435,7 +435,7 @@ public class MainScene:SceneBase
                 {
                     AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_car"], m_car.gameObject);
                     m_audioCarHitCar = true;
-                    //todo 男主死亡
+                    m_hero.Die(); //男主死亡
                 }
             }
 
@@ -469,14 +469,7 @@ public class MainScene:SceneBase
                     m_car2.transform.Translate(new Vector2(-1, 0) * 10f * Time.deltaTime);
                 }
             }
-            else
-            {
-                if (!m_audioCarHitCar)
-                {
-                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_car"], m_car.gameObject);
-                    m_audioCarHitCar = true;
-                }
-            }
+            
 
             float steelDistance = m_steelStage1EndPos.y - m_steel.transform.localPosition.y;
             if (steelDistance < -0.1f)
@@ -506,6 +499,15 @@ public class MainScene:SceneBase
                 if (timer > 6)
                 {
                     m_car2.transform.Translate(new Vector2(-1, 0) * 10f * Time.deltaTime);
+                }
+            }
+            else
+            {
+                if (!m_audioCarHitCar)
+                {
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_car"], m_car.gameObject);
+                    m_audioCarHitCar = true;
+                    m_hero.Die(); //男主死亡
                 }
             }
 

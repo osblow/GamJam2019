@@ -46,8 +46,16 @@ public class MapHeroNode : MapLifeNode
 
     void CheckMove()
     {
+        if(m_motionState == MotionState.Die)
+        {
+            return;
+        }
+        if (m_motionState == MotionState.Operate)
+        {
+            return;
+        }
         //爬梯
-        if(m_climb_pos != Vector2.zero)
+        if (m_climb_pos != Vector2.zero)
         {
             Vector2 direction = m_climb_pos - new Vector2(transform.position.x, transform.position.y);
             float distance = Mathf.Abs(direction.y);
@@ -137,7 +145,15 @@ public class MapHeroNode : MapLifeNode
             m_animPlayer.Play(AnimationData.DATA["cat_run"]);
         }else if(m_motionState == MotionState.Climb)
         {
-            m_animPlayer.Play(AnimationData.DATA["hero_jump"]);
+            m_animPlayer.Play(AnimationData.DATA["cat_climb"]);
+        }
+        else if (m_motionState == MotionState.Die)
+        {
+            m_animPlayer.Play(AnimationData.DATA["cat_die"]);
+        }
+        else if (m_motionState == MotionState.Operate)
+        {
+            m_animPlayer.Play(AnimationData.DATA["cat_operate"]);
         }
     }
 
@@ -222,6 +238,23 @@ public class MapHeroNode : MapLifeNode
         //{
         //    laser.Init(transform.position, transform.parent.TransformPoint(clickPosition));
         //}
+    }
+
+    public void Die()
+    {
+        m_motionState = MotionState.Die;
+    }
+
+    public void Operate()
+    {
+        m_motionState = MotionState.Operate;
+        StartCoroutine(Countdown());
+    }
+
+    IEnumerator Countdown()
+    { 
+        yield return new WaitForSeconds(1f);
+        m_motionState = MotionState.Idle;
     }
 
     void OnDestroy()

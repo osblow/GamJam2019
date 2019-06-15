@@ -59,7 +59,7 @@ public class MapEnemyNode : MapLifeNode
 
     void InitAnimation()
     {
-        m_animPlayer.Play(AnimationData.DATA["hero_idle"]);
+        m_animPlayer.Play(AnimationData.DATA["cat_idle"]);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
