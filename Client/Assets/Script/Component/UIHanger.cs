@@ -55,9 +55,7 @@ public class UIHanger : MonoBehaviour
             m_root.transform.SetParent(m_UICanvas.GetComponent<RectTransform>());
             //Util.GetOrAddComponent<Image>(m_root);
             m_root.transform.localScale = new Vector3(1, 1, 1);
-
-
-            m_hangObj = GameObject.Instantiate(Resources.Load("Prefab/UI/Hanger/HangerNameBlood"), m_root.transform) as GameObject;
+            
             m_hangObj = GameObject.Instantiate(Resources.Load(hangObjPrefab), m_root.transform) as GameObject;
 
         }
