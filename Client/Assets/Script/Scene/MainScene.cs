@@ -300,6 +300,9 @@ public class MainScene:SceneBase
                     AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_body"], m_car.gameObject);
                     m_audioCarHitBody = true;
                 }
+
+
+                ResultView.Instance.gameObject.SetActive(true);
             }
         }
 

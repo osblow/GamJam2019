@@ -2,22 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PropMgr
+public class PropMgr : MonoBehaviour
 {
-    public static PropMgr Instance
+    public static PropMgr Instance;
+    private void Awake()
     {
-        get
-        {
-            if(s_ins == null)
-            {
-                s_ins = new PropMgr();
-            }
-
-            return s_ins;
-        }
+        Instance = this;
     }
-    private static PropMgr s_ins = null;
-    private PropMgr() { }
 
 
 

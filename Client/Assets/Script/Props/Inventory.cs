@@ -4,24 +4,15 @@ using UnityEngine;
 
 
 
-public class Inventory
+public class Inventory : MonoBehaviour
 {
-    public static Inventory Instance
+    public static Inventory Instance;
+    private void Awake()
     {
-        get
-        {
-            if(s_ins == null)
-            {
-                s_ins = new Inventory();
-            }
-            return s_ins;
-        }
-    }
-    private static Inventory s_ins;
-    private Inventory()
-    {
+        Instance = this;
         InitUI();
     }
+    
 
 
 
