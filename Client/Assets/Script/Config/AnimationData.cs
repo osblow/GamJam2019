@@ -30,6 +30,9 @@ public class AnimationData
         { "hero_idle",new AnimationInfo("hero_idle","Sprite/Character/test01",0,5,1.5f,true) },
         { "hero_run",new AnimationInfo("hero_idle","Sprite/Character/test01",6,11,1.0f,true,"hero_run") },
         { "hero_jump",new AnimationInfo("hero_jump","Sprite/Character/test02",0,10,0.3f,false,"hero_jump") },
+        { "cat_idle",new AnimationInfo("cat_anim_1","Sprite/Character/cat_anim_1",3,4,0.75f,true) },
+        { "cat_run",new AnimationInfo("cat_anim_1","Sprite/Character/cat_anim_1",5,8,1f,true) },
+        { "cat_operate",new AnimationInfo("cat_anim_1","Sprite/Character/cat_anim_1",0,2,0.75f,true) },
     };
 }
 

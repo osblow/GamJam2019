@@ -141,6 +141,7 @@ public class MainScene:SceneBase
         if (m_curStage == Stage.Start)
         {
             m_car.transform.localPosition = m_carStartOrgPos;
+            m_steel.transform.localPosition = m_steelStartOrgPos;
             m_girl.Idle();
             m_audioCarHitBody = false;
         }

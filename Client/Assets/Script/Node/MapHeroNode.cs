@@ -131,10 +131,10 @@ public class MapHeroNode : MapLifeNode
     {
         if(m_motionState == MotionState.Idle)
         {
-            m_animPlayer.Play(AnimationData.DATA["hero_idle"]);
+            m_animPlayer.Play(AnimationData.DATA["cat_idle"]);
         }else if(m_motionState == MotionState.Run)
         {
-            m_animPlayer.Play(AnimationData.DATA["hero_run"]);
+            m_animPlayer.Play(AnimationData.DATA["cat_run"]);
         }else if(m_motionState == MotionState.Climb)
         {
             m_animPlayer.Play(AnimationData.DATA["hero_jump"]);
