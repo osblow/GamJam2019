@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 public enum PropGetAction
@@ -11,6 +8,15 @@ public enum PropGetAction
     SCENE = 1, // 获取之后会显示在场景
     INVENTORY = 2, // 获取之后会显示在背包
 }
+
+
+public enum PropAnimationType
+{
+    NONE = 0,
+    OFFSET = 1,
+    ROTATION = 2,
+}
+
 
 class PropConfig
 {
@@ -28,9 +34,21 @@ class PropConfig
             {"how_to_get", PropGetAction.SCENE }, // 
         } },
         {103, new Dictionary<string, object>(){
-            {"id", "102" },
+            {"id", "103" },
             {"prev_prop", new Dictionary<int, string>(){ {101, ""} } },
             {"how_to_get", PropGetAction.SCENE }, // 
+        } },
+        {104, new Dictionary<string, object>(){
+            {"id", "104" },
+            {"how_to_get", PropGetAction.SCENE }, // 
+            {"anim_type", PropAnimationType.ROTATION },
+            {"anim_rot", -160f },
+        } },
+        {105, new Dictionary<string, object>(){
+            {"id", "105" },
+            {"how_to_get", PropGetAction.SCENE }, // 
+            //{"used_icon", "Sprite/Prop/hammer3" }, // 使用结束后替换的图标
+            {"associated_obj_used_icon", "Sprite/Prop/hammer3" } // 所关联物体在自己使用结束后替换图标。todo: 序列帧
         } },
     };
 }

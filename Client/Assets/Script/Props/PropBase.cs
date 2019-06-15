@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PropBase : MonoBehaviour
 {
@@ -8,11 +9,14 @@ public class PropBase : MonoBehaviour
 
     public bool ShowByDefault = true; // 场景初始化时是否直接显示
 
+    public GameObject AssociatedObj;
+
     public PropData PropData; // 从id初始化
 
     protected GameObject m_uiBtn = null; // 浮在头顶的按钮
     protected bool m_isInTrigger = false; // 是否与主角发生碰撞
     protected bool m_isUsing = false; // 正在使用中，不显示使用的图标
+    protected bool m_isOver = false; // 已经使用结束，无交互
     
     public void OnPropBeginUsing()
     {
@@ -27,6 +31,7 @@ public class PropBase : MonoBehaviour
             return;
         }
 
+        m_uiBtn.SetActive(false);
         OnPropUsing();
         Inventory.Instance.AddProp(PropData);
 
@@ -43,13 +48,31 @@ public class PropBase : MonoBehaviour
 
     public virtual void OnPropEndUsing()
     {
+        // 使用完后图标的替换
+        string usedIconPath = PropData.GetData<string>("used_icon");
+        if(usedIconPath != default(string))
+        {
+            Texture2D tex = Resources.Load(usedIconPath) as Texture2D;
+            Sprite spr = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+            GetComponent<Image>().sprite = spr;
+        }
+
+        // 使用完后所关联物体图标的替换
+        string associateIconPath = PropData.GetData<string>("associated_obj_used_icon");
+        if (AssociatedObj && associateIconPath != default(string))
+        {
+            Texture2D tex = Resources.Load(associateIconPath) as Texture2D;
+            Sprite spr = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+            AssociatedObj.GetComponent<Image>().sprite = spr;
+        }
+
         m_isUsing = false;
     }
 
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (m_isInTrigger) return;
+        if (m_isInTrigger || m_isOver) return;
 
         // 显示操作按钮
         Debug.Log("enter prop" + PropId);
@@ -66,7 +89,7 @@ public class PropBase : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D other)
     {
-        if (!m_isInTrigger) return;
+        if (!m_isInTrigger || m_isOver) return;
 
         // 隐藏操作按钮
         Debug.Log("left prop" + PropId);
@@ -101,8 +124,8 @@ public class PropBase : MonoBehaviour
     }
 
 
-    private const string c_btnPrefabPath = "Prefab/UI/Hanger/HangerPropBtn";
-    private void InitBtn()
+    public const string c_btnPrefabPath = "Prefab/UI/Hanger/HangerPropBtn";
+    protected virtual void InitBtn()
     {
         UIHangerPropBtn hanger = gameObject.AddComponent<UIHangerPropBtn>();
         hanger.Init(c_btnPrefabPath, gameObject, 100);
