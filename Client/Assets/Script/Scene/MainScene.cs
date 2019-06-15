@@ -102,6 +102,10 @@ public class MainScene:SceneBase
 
     void ResetScene()
     {
+        if(TargetStage != 0 && m_curStage != TargetStage)
+        {
+            m_curStage = TargetStage;
+        }
         if (m_curStage == Stage.Start)
         {
             m_car.transform.localPosition = m_carStartOrgPos;
