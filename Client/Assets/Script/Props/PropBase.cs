@@ -31,11 +31,12 @@ public class PropBase : MonoBehaviour
             return;
         }
 
+
+        m_isUsing = true;
+
         m_uiBtn.SetActive(false);
         OnPropUsing();
         Inventory.Instance.AddProp(PropData);
-
-        m_isUsing = true;
     }
 
     /// <summary>
@@ -77,7 +78,7 @@ public class PropBase : MonoBehaviour
     }
 
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (m_isInTrigger || m_isOver) return;
 
@@ -94,7 +95,7 @@ public class PropBase : MonoBehaviour
     }
     
 
-    public void OnTriggerExit2D(Collider2D other)
+    public virtual void OnTriggerExit2D(Collider2D other)
     {
         if (!m_isInTrigger || m_isOver) return;
 

@@ -32,7 +32,43 @@ class PropConfig
         ((MainScene)SceneManager.Instance.CurScene).TargetStage = stage;
     }
 
+    private static void ResetSwitch()
+    {
+        // 判断是否开始消防栓
+        if (Inventory.Instance.GetProp(206) != null)
+        {
+            // 如果开，女主就活了
+            ChangeToStage(MainScene.Stage.Stage3);
+        }
+        else
+        {
+            // 关，女主死
+            ChangeToStage(MainScene.Stage.Start);
+        }
+    }
 
+    private static void HoldStop()
+    {
+        // 举起路障
+        // 分为三种情况
+        bool hasHydrant = Inventory.Instance.GetProp(206) != null;
+        bool hasSwitch = Inventory.Instance.GetProp(205) != null;
+        if (!hasHydrant)
+        {
+            // 1. 消防栓没开，左车撞死
+            ChangeToStage(MainScene.Stage.BadEnd);
+        }
+        else if (hasSwitch)
+        {
+            // 2. 消防栓开了，有红绿灯，右车撞死，女主死
+            ChangeToStage(MainScene.Stage.BadEnd2);
+        }
+        else
+        {
+            // 3. 消防栓开了，无红绿灯，右车撞死，女主活
+            ChangeToStage(MainScene.Stage.GoodEnd);
+        }
+    }
 
     public static Dictionary<int, Dictionary<string, object>> S_CONFIGS = new Dictionary<int, Dictionary<string, object>>()
     {
@@ -98,6 +134,7 @@ class PropConfig
             {"used_icon", "Sprite/Prop/hammer3" }, // 使用结束后替换的图标（开关状态转换）
             {"associated_obj_used_icon", "Sprite/Prop/hammer3" }, // 所关联物体在自己使用结束后替换图标(地面上的红绿灯)
             {"used_action",  new PropAction{Action=delegate(){ ChangeToStage(MainScene.Stage.Stage1); } } },
+            {"reset_action",  new PropAction{Action=delegate(){ ResetSwitch(); } } },
         } },
         // 消防栓
         {206, new Dictionary<string, object>(){
@@ -114,6 +151,7 @@ class PropConfig
             {"how_to_get", PropGetAction.SCENE }, // 
             {"anim_type", PropAnimationType.OFFSET },
             {"anim_rot", new UnityEngine.Vector3(0, 50, 0) },
+            {"used_action",  new PropAction{Action=delegate(){ HoldStop(); } } },
         } },
         // 扳手
         {208, new Dictionary<string, object>(){
