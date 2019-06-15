@@ -21,7 +21,7 @@ public class AudioInfo
 public class AudioData
 {
     public static Dictionary<string, AudioInfo> DATA = new Dictionary<string, AudioInfo>{
-        { "hero_run",new AudioInfo("hero_run","Audio/Sound/1004_jump",true) },
+        { "hero_run",new AudioInfo("hero_run","Audio/Sound/walk",true) },
         { "hero_jump",new AudioInfo("hero_jump","Audio/Sound/1004_jump") },
         { "car_hit_body",new AudioInfo("car_hit_body","Audio/Sound/car_hit_body") },
         { "car_hit_car",new AudioInfo("car_hit_car","Audio/Sound/car_hit_car") },
