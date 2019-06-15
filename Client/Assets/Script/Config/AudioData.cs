@@ -25,6 +25,7 @@ public class AudioData
         { "hero_jump",new AudioInfo("hero_jump","Audio/Sound/1004_jump") },
         { "car_hit_body",new AudioInfo("car_hit_body","Audio/Sound/car_hit_body") },
         { "car_hit_car",new AudioInfo("car_hit_car","Audio/Sound/car_hit_car") },
+        { "time_stretch",new AudioInfo("car_hit_car","Audio/Sound/time_stretch") },
         { "bg_1",new AudioInfo("bg_1","Audio/BGM/Family Friendly Halloween",true,0.5f) },
     };
 }
