@@ -128,8 +128,16 @@ public class MainScene:SceneBase
     {
         if(TargetStage != 0 && m_curStage != TargetStage)
         {
-            m_curStage = TargetStage;
+            if(TargetStage == Stage.BadEnd || TargetStage == Stage.BadEnd2 || TargetStage == Stage.NormalEnd || TargetStage == Stage.GoodEnd)
+            {
+                //如果是结局，保持当前状态重置一次
+            }
+            else
+            {
+                m_curStage = TargetStage;
+            }
         }
+
         if (m_curStage == Stage.Start)
         {
             m_car.transform.localPosition = m_carStartOrgPos;
@@ -189,6 +197,14 @@ public class MainScene:SceneBase
         if (m_curStage == Stage.GoodEnd)
         {
             //不重置
+        }
+        //如果是结局，重置后再切状态
+        if (TargetStage != 0 && m_curStage != TargetStage)
+        {
+            if (TargetStage == Stage.BadEnd || TargetStage == Stage.BadEnd2 || TargetStage == Stage.NormalEnd || TargetStage == Stage.GoodEnd)
+            {
+                m_curStage = TargetStage;
+            }
         }
     }
 
