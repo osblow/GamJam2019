@@ -7,9 +7,14 @@ public class MainScene:SceneBase
     public enum Stage
     {
         Start = 1,//女主被出撞死的状态
+        BadEnd,//在开消防栓之前，男主举牌，被左车撞死亡
         Stage1,//阻止老鼠拨成红灯后，女主被砸死的状态
-        Stage2,//用消防栓拦住汽车，女主成功过马路后，两车相撞的状态
-        GoodEnd,//主角阻止辆车相撞牺牲，结束循环
+        Stage2,//用消防栓拦住汽车，两车相撞的状态(女主过马路,取决于红绿灯)
+        Stage3,//用消防栓拦住汽车，两车相撞的状态，主角切成绿灯，女主成功过马路
+        Stage4,//用消防栓拦住汽车，两车相撞的状态，主角切成红灯灯，女主被砸死的状态
+        BadEnd2,//在开消防栓之后，男主举牌，被右车撞死亡
+        NormalEnd,//Stage3 跟女主离开，普通结局
+        GoodEnd,//Stage3 主角阻止两车相撞牺牲，结束循环
     }
 
     public Stage TargetStage = 0;
@@ -19,8 +24,13 @@ public class MainScene:SceneBase
     Dictionary<Stage, float> m_dicStageTime = new Dictionary<Stage, float>()
     {
         {Stage.Start,10 },
+        {Stage.BadEnd,100000},
         {Stage.Stage1,10 },
         {Stage.Stage2,10 },
+        {Stage.Stage3,10},
+        {Stage.Stage4,10},
+        {Stage.BadEnd2,100000},
+        {Stage.NormalEnd,100000},
         {Stage.GoodEnd,100000 },
     };
 
@@ -39,6 +49,7 @@ public class MainScene:SceneBase
     Vector2 m_carStage1EndPos = new Vector2(827, -164f);
     Vector2 m_carStage2EndPos = new Vector2(-173, -164f);
     Vector2 m_carGoodEndPos = new Vector2(-173, -164f);
+    Vector2 m_carBadEndPos = new Vector2(41, -164f);
     //--------------------------------------------------------
     GameObject m_car2;
     Vector2 m_car2StartOrgPos = new Vector2(817, -164f);
@@ -142,6 +153,39 @@ public class MainScene:SceneBase
             m_audioCarHitCar = false;
         }
 
+        if (m_curStage == Stage.Stage3)
+        {
+            m_car.transform.localPosition = m_carStartOrgPos;
+            m_car2.transform.localPosition = m_car2StartOrgPos;
+            m_steel.transform.localPosition = m_steelStartOrgPos;
+            m_girl.Idle(); 
+            m_audioCarHitCar = false;
+        }
+
+        if (m_curStage == Stage.Stage4)
+        {
+            m_car.transform.localPosition = m_carStartOrgPos;
+            m_car2.transform.localPosition = m_car2StartOrgPos;
+            m_steel.transform.localPosition = m_steelStartOrgPos;
+            m_girl.Idle();
+            m_audioCarHitCar = false;
+        }
+
+        if (m_curStage == Stage.BadEnd)
+        {
+            //不重置
+        }
+
+        if (m_curStage == Stage.BadEnd2)
+        {
+            //不重置
+        }
+
+        if (m_curStage == Stage.NormalEnd)
+        {
+            //不重置
+        }
+
         if (m_curStage == Stage.GoodEnd)
         {
             //不重置
@@ -171,6 +215,28 @@ public class MainScene:SceneBase
                 }
             }
             
+        }
+
+        if (m_curStage == Stage.BadEnd)
+        {
+            float distance = m_carBadEndPos.x - m_car.transform.localPosition.x;
+
+            if (distance > 0.1f)
+            {
+                if (timer > 4)
+                {
+                    m_car.transform.Translate(new Vector2(1, 0) * 10f * Time.deltaTime);
+                }
+            }
+            else
+            {
+                //m_girl.Die(); //男主死亡
+                if (!m_audioCarHitBody)
+                {
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_body"], m_car.gameObject);
+                    m_audioCarHitBody = true;
+                }
+            }
         }
 
         if (m_curStage == Stage.Stage1)
@@ -239,6 +305,163 @@ public class MainScene:SceneBase
                     m_steel.transform.Translate(new Vector2(0, -1) * 10f * Time.deltaTime);
                 }
             }
+        }
+
+        if (m_curStage == Stage.Stage3)
+        {
+            float carDistance = m_carGoodEndPos.x - m_car.transform.localPosition.x;
+            if (carDistance > 0.1f)
+            {
+                if (timer > 4)
+                {
+                    m_car.transform.Translate(new Vector2(1, 0) * 10f * Time.deltaTime);
+                }
+            }
+
+            float car2Distance = m_car2Stage2EndPos.x - m_car2.transform.localPosition.x;
+            if (car2Distance < -0.1f)
+            {
+                if (timer > 6)
+                {
+                    m_car2.transform.Translate(new Vector2(-1, 0) * 10f * Time.deltaTime);
+                }
+            }
+            else
+            {
+                if (!m_audioCarHitCar)
+                {
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_car"], m_car.gameObject);
+                    m_audioCarHitCar = true;
+                }
+            }
+
+            float steelDistance = m_steelStage1EndPos.y - m_steel.transform.localPosition.y;
+            if (steelDistance < -0.1f)
+            {
+                if (timer > 8)
+                {
+                    m_steel.transform.Translate(new Vector2(0, -1) * 10f * Time.deltaTime);
+                }
+            }
+            //todo 女主生还
+        }
+
+        if (m_curStage == Stage.Stage4)
+        {
+            float carDistance = m_carGoodEndPos.x - m_car.transform.localPosition.x;
+            if (carDistance > 0.1f)
+            {
+                if (timer > 4)
+                {
+                    m_car.transform.Translate(new Vector2(1, 0) * 10f * Time.deltaTime);
+                }
+            }
+
+            float car2Distance = m_car2Stage2EndPos.x - m_car2.transform.localPosition.x;
+            if (car2Distance < -0.1f)
+            {
+                if (timer > 6)
+                {
+                    m_car2.transform.Translate(new Vector2(-1, 0) * 10f * Time.deltaTime);
+                }
+            }
+            else
+            {
+                if (!m_audioCarHitCar)
+                {
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_car"], m_car.gameObject);
+                    m_audioCarHitCar = true;
+                }
+            }
+
+            float steelDistance = m_steelStage1EndPos.y - m_steel.transform.localPosition.y;
+            if (steelDistance < -0.1f)
+            {
+                if (timer > 8)
+                {
+                    m_steel.transform.Translate(new Vector2(0, -1) * 10f * Time.deltaTime);
+                }
+            }
+            //todo 女主死亡
+        }
+
+        if (m_curStage == Stage.BadEnd2)
+        {
+            float carDistance = m_carGoodEndPos.x - m_car.transform.localPosition.x;
+            if (carDistance > 0.1f)
+            {
+                if (timer > 4)
+                {
+                    m_car.transform.Translate(new Vector2(1, 0) * 10f * Time.deltaTime);
+                }
+            }
+
+            float car2Distance = m_car2GoodEndPos.x - m_car2.transform.localPosition.x;
+            if (car2Distance < -0.1f)
+            {
+                if (timer > 6)
+                {
+                    m_car2.transform.Translate(new Vector2(-1, 0) * 10f * Time.deltaTime);
+                }
+            }
+            else
+            {
+                if (!m_audioCarHitCar)
+                {
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_car"], m_car.gameObject);
+                    m_audioCarHitCar = true;
+                    //todo 男主死亡
+                }
+            }
+
+            float steelDistance = m_steelStage1EndPos.y - m_steel.transform.localPosition.y;
+            if (steelDistance < -0.1f)
+            {
+                if (timer > 8)
+                {
+                    m_steel.transform.Translate(new Vector2(0, -1) * 10f * Time.deltaTime);
+                }
+            }
+            //todo 女主死亡
+        }
+
+        if (m_curStage == Stage.NormalEnd)
+        {
+            float carDistance = m_carGoodEndPos.x - m_car.transform.localPosition.x;
+            if (carDistance > 0.1f)
+            {
+                if (timer > 4)
+                {
+                    m_car.transform.Translate(new Vector2(1, 0) * 10f * Time.deltaTime);
+                }
+            }
+
+            float car2Distance = m_car2Stage2EndPos.x - m_car2.transform.localPosition.x;
+            if (car2Distance < -0.1f)
+            {
+                if (timer > 6)
+                {
+                    m_car2.transform.Translate(new Vector2(-1, 0) * 10f * Time.deltaTime);
+                }
+            }
+            else
+            {
+                if (!m_audioCarHitCar)
+                {
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_car"], m_car.gameObject);
+                    m_audioCarHitCar = true;
+                }
+            }
+
+            float steelDistance = m_steelStage1EndPos.y - m_steel.transform.localPosition.y;
+            if (steelDistance < -0.1f)
+            {
+                if (timer > 8)
+                {
+                    m_steel.transform.Translate(new Vector2(0, -1) * 10f * Time.deltaTime);
+                }
+            }
+            //todo 和女主离开动画
         }
 
         if (m_curStage == Stage.GoodEnd)
