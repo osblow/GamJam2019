@@ -20,13 +20,13 @@ public class MapHeroNode : MapLifeNode
 
     Rigidbody2D m_rigidbody;
     AnimationPlayer m_animPlayer;
-    UIHanger m_UIHanger;
+    UIHangerText m_UIHanger;
 
     void Start()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
         m_animPlayer = Util.GetOrAddComponent<AnimationPlayer>(gameObject);
-        m_UIHanger = Util.GetOrAddComponent<UIHanger>(gameObject);
+        m_UIHanger = Util.GetOrAddComponent<UIHangerText>(gameObject);
 
         CurHP = 100;
         MaxHP = 100;
@@ -35,7 +35,7 @@ public class MapHeroNode : MapLifeNode
         InitAnimation();
         InitAttack();
 
-        m_UIHanger.Init(transform.Find("Head").gameObject);
+        m_UIHanger.Init("Prefab/UI/Hanger/HangerNameBlood", transform.Find("Head").gameObject);
         m_UIHanger.SetName("Hero");
     }
 

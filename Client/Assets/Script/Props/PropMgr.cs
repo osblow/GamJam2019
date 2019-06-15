@@ -19,6 +19,14 @@ public class PropMgr
         WalkTransform(sceneRoot, GetPropCom);
     }
 
+    public void Clear()
+    {
+        // 
+        s_allPropsInScene.Clear();
+    }
+
+
+
     private void GetPropCom(Transform transform)
     {
         PropBase com = transform.GetComponent<PropBase>();

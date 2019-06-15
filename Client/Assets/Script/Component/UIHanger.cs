@@ -5,14 +5,22 @@ using UnityEngine.UI;
 
 public class UIHanger : MonoBehaviour
 {
-    Camera m_camScene;
-    Camera m_camUI;
-    GameObject m_UICanvas;
-    GameObject m_node;  //挂载实体
-    GameObject m_root;  //UI根节点
-    GameObject m_hangObj;
-    bool m_isInit = false;
-    float m_offset = 0;
+    public GameObject HangObject
+    {
+        get
+        {
+            return m_hangObj;
+        }
+    }
+
+    protected Camera m_camScene;
+    protected Camera m_camUI;
+    protected GameObject m_UICanvas;
+    protected GameObject m_node;  //挂载实体
+    protected GameObject m_root;  //UI根节点
+    protected GameObject m_hangObj;
+    protected bool m_isInit = false;
+    protected float m_offset = 0;
 
     void Awake()
     {
@@ -38,7 +46,7 @@ public class UIHanger : MonoBehaviour
         }
     }
 
-    public void Init(GameObject node,float offset = 10f)
+    public virtual void Init(string hangObjPrefab, GameObject node,float offset = 10f)
     {
         if(m_root == null)
         {
@@ -48,16 +56,13 @@ public class UIHanger : MonoBehaviour
             m_root.transform.localScale = new Vector3(1, 1, 1);
 
             m_hangObj = GameObject.Instantiate(Resources.Load("Prefab/UI/Hanger/HangerNameBlood"), m_root.transform) as GameObject;
+            m_hangObj = GameObject.Instantiate(Resources.Load(hangObjPrefab), m_root.transform) as GameObject;
         }
         m_offset = offset;
         m_node = node;
         m_isInit = true;
     }
-
-    public void SetName(string name)
-    {
-        m_hangObj.transform.Find("TxtName").GetComponent<Text>().text = name;
-    }
+    
 
     void OnDestroy(){
         if (m_root != null)

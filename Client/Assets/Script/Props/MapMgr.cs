@@ -9,11 +9,20 @@ public class MapMgr
     private static void Init(string[] prefabPaths)
     {
         s_maps.Clear();
-        foreach(string path in prefabPaths)
+        for (int i = 0; i < prefabPaths.Length; i++)
         {
-            Map newMap = new Map(path);
-            s_maps.Add(newMap.Id, new Map(path));
+            s_maps.Add(i, new Map(i, prefabPaths[i]));
         }
+    }
+
+    private static void Clear()
+    {
+        foreach(Map map in s_maps.Values)
+        {
+            map.Destroy();
+        }
+
+        s_maps.Clear();
     }
 }
 
@@ -23,13 +32,20 @@ public class Map
     public PropMgr PropMgr;
 
     public int Id; // 从prefab配置中读取
+    public GameObject GameObject;
 
-
-    public Map(string path)
+    public Map(int id, string path)
     {
-        // 从prefab加载，并初始化PropMgr
-        GameObject mapObj = GameObject.Instantiate<GameObject>(Resources.Load(path) as GameObject);
+        Id = id;
 
-        PropMgr = new PropMgr(mapObj.transform);
+        // 从prefab加载，并初始化PropMgr
+        GameObject = GameObject.Instantiate<GameObject>(Resources.Load(path) as GameObject);
+
+        PropMgr = new PropMgr(GameObject.transform);
+    }
+
+    public void Destroy()
+    {
+        GameObject.Destroy(GameObject);
     }
 }
