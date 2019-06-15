@@ -202,6 +202,15 @@ public class MapHeroNode : MapLifeNode
         //m_UIHanger.SetAble(true);
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Stairs")
+        {
+            MapStairsNode node = collision.gameObject.transform.parent.GetComponent<MapStairsNode>();
+            node.SetButtonAble(true);
+        }
+    }
+
     //void OnTriggerStay2D(Collider2D collision)
     //{
     //    

@@ -31,6 +31,13 @@ public class PropBase : MonoBehaviour
             return;
         }
 
+        // 消费掉前置物品
+        int prevId = PropData.GetData<int>("prev_prop");
+        if (prevId != 0)
+        {
+            Inventory.Instance.RemoveProp(prevId);
+        }
+
 
         m_isUsing = true;
 
