@@ -51,6 +51,13 @@ public class ReusabeProp : PropBase
                 SetGreenLight();
             }
 
+            // 道具重置完后的文字
+            string tips = PropData.GetData<string>("reset_comment");
+            if (tips != default(string))
+            {
+                UICommentory.Instance.SetTips(tips);
+            }
+
             return;
         }
 

@@ -124,6 +124,35 @@ public class MainScene:SceneBase
         }  
     }
 
+
+    private static bool s_firstGrilDie = true;
+    private static List<Stage> s_showedCommentStages = new List<Stage>();// 已经展示过一次提示的情景
+    void AddCommentory()
+    {
+        if (m_curStage == Stage.Start && !s_showedCommentStages.Contains(m_curStage))
+        {
+            UICommentory.Instance.SetTips("咦？刚才发生了什么，怎么脑子里多出了一段记忆...");
+            UICommentory.Instance.SetTips("我回到了小美被撞前的10秒钟，但时间不够我跑过去");
+            UICommentory.Instance.SetTips("不！我一定要救她！");
+            UICommentory.Instance.SetTips("先看看周围有什么可以利用的东西");
+            s_showedCommentStages.Add(m_curStage);
+        }
+
+        if (m_curStage == Stage.Stage1 && !s_showedCommentStages.Contains(m_curStage))
+        {
+            UICommentory.Instance.SetTips("不！！！！！！！！！！");
+            UICommentory.Instance.SetTips("还是得让小美过到马路对面去");
+            s_showedCommentStages.Add(m_curStage);
+        }
+
+        if (m_curStage == Stage.Stage2 && !s_showedCommentStages.Contains(m_curStage))
+        {
+            UICommentory.Instance.SetTips("小美得救了。但是他们却...我好像害了更多的人");
+            s_showedCommentStages.Add(m_curStage);
+        }
+    }
+
+
     void ResetScene()
     {
         // 恢复主角行动, 并把路牌还原
@@ -133,6 +162,9 @@ public class MainScene:SceneBase
         //{
         //    PropMgr.Instance.GetProp(207).OnPropBeginUsing(); // 相当于再点击一次
         //}
+
+        //
+        AddCommentory();
 
         if (TargetStage != 0 && m_curStage != TargetStage)
         {
@@ -237,6 +269,13 @@ public class MainScene:SceneBase
                 {
                     AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_body"], m_car.gameObject);
                     m_audioCarHitBody = true;
+                }
+
+                // 上方文字提示
+                if (s_firstGrilDie)
+                {
+                    UICommentory.Instance.SetTips("小美！！！天哪怎么会这样！");
+                    s_firstGrilDie = false;
                 }
             }
             

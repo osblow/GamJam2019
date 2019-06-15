@@ -30,6 +30,13 @@ public class Cap1 : PropBase
         // 检查前置
         if (!PropData.CheckPrevProp())
         {
+            // 道具无法使用时的文字
+            string tips = PropData.GetData<string>("prev_comment");
+            if (tips != default(string))
+            {
+                UICommentory.Instance.SetTips(tips);
+            }
+
             Debug.Log("previous prop not exist");
             return;
         }
@@ -63,7 +70,7 @@ public class Cap1 : PropBase
 
             // 旋转一定角度开启
             float rotation = -160f;
-            transform.DORotate(new Vector3(0, 0, rotation), 0.5f);
+            transform.DORotate(new Vector3(0, 0, rotation), 0.5f).SetDelay(0.5f);
 
             Inventory.Instance.AddProp(PropData);
             m_isOver = true;

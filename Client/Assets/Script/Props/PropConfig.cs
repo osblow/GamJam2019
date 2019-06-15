@@ -77,6 +77,7 @@ class PropConfig
             {"icon", "Sprite/Prop/hammer2" },
             {"prev_prop", 102}, // 字符串指向要替换自己的图标或者Prefab路径
             {"how_to_get", PropGetAction.SCENE }, // 
+            {"used_comment", "" }
         } },
         {102, new Dictionary<string, object>(){
             {"id", "102" },
@@ -107,6 +108,7 @@ class PropConfig
             {"id", "201" },
             {"icon", "Sprite/Prop/img_ganggan" },
             {"how_to_get", PropGetAction.INVENTORY }, // 
+            {"used_comment", "好像可以插进井盖的孔里，会发生什么呢？" }
         } },
         // 第一个井盖, 要与第一个撬棍组合
         {202, new Dictionary<string, object>(){
@@ -115,12 +117,15 @@ class PropConfig
             {"used_icon", "Sprite/Prop/lid_with_bar" }, // 使用结束后替换的图标（插了撬棍的井盖）
             {"prev_prop", 201}, // 字符串指向要替换自己的图标或者Prefab路径
             {"how_to_get", PropGetAction.SCENE }, // 
+            {"prev_comment", "井盖上有个孔" },
+            {"used_comment", "哎哟哎哟，车来啦！ 咔！~~~" }
         } },
         // 第二个撬棍
         {203, new Dictionary<string, object>(){
             {"id", "203" },
             {"icon", "Sprite/Prop/img_qiaogun" },
             {"how_to_get", PropGetAction.INVENTORY }, // 
+            {"used_comment", "这根虽然没有之前那么粗，但是好像也可以用来撬开东西" }
         } },
         // 第二个井盖, 要与第二个撬棍组合
         {204, new Dictionary<string, object>(){
@@ -129,6 +134,8 @@ class PropConfig
             {"how_to_get", PropGetAction.SCENE }, // 
             {"anim_type", PropAnimationType.ROTATION },
             {"anim_rot", -160f },
+            {"prev_comment", "还有一个井盖" },
+            {"used_comment", "咦？又有一个梯子，下面有什么呢？" }
         } },
         // 红绿灯开关
         {205, new Dictionary<string, object>(){
@@ -138,6 +145,8 @@ class PropConfig
             //{"associated_obj_used_icon", "Sprite/Prop/hammer3" }, // 所关联物体在自己使用结束后替换图标(地面上的红绿灯)
             {"used_action",  new PropAction{Action=delegate(){ ChangeToStage(MainScene.Stage.Stage1); } } },
             {"reset_action",  new PropAction{Action=delegate(){ ResetSwitch(); } } },
+            {"reset_comment", "又变回绿灯了，小美快过去！不然会被钢管砸到！！！" },
+            {"used_comment", "嗯。。。变成红灯了，小美就不会过马路，也不会被车撞到了" }
         } },
         // 消防栓
         {206, new Dictionary<string, object>(){
@@ -149,6 +158,8 @@ class PropConfig
             {"used_action",  new PropAction{Action=delegate(){ ChangeToStage(MainScene.Stage.Stage2); } } },
             {"anim_type", PropAnimationType.ROTATION },
             {"anim_rot", 359f },
+            {"prev_comment", "已经锈死了，必须找一个扳手" },
+            {"used_comment", "消防栓在喷水，那辆车一定会停下来。但..." }
         } },
         // 路障，应用时有偏移
         {207, new Dictionary<string, object>(){
@@ -157,12 +168,14 @@ class PropConfig
             {"used_action",  new PropAction{Action=delegate(){ HoldStop(); } } },
             {"anim_type", PropAnimationType.ROTATION },
             {"anim_rot", -72f },
+            {"used_comment", "嘿嘿，告诉你禁止通行！\n哎，哎，哎呀。这路牌怎么站不住呀，赶紧扶好~~" }
         } },
         // 扳手
         {208, new Dictionary<string, object>(){
             {"id", "208" },
             {"icon", "Sprite/Prop/img_banshou" },
             {"how_to_get", PropGetAction.INVENTORY }, // 
+            {"used_comment", "去下面试试？" }
         } },
         // 心心
         {209, new Dictionary<string, object>(){
@@ -170,6 +183,7 @@ class PropConfig
             {"icon", "Sprite/Prop/use_love" },
             {"how_to_get", PropGetAction.SCENE }, // 
             {"used_action",  new PropAction{Action=delegate(){ ChangeToStage(MainScene.Stage.NormalEnd); } } },
+            {"used_comment", "小美，我给你讲一个王子困在时间循环里，最终救下公主的故事吧。" }
         } },
     };
 }

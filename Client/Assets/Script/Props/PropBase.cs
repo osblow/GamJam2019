@@ -27,6 +27,13 @@ public class PropBase : MonoBehaviour
         // 检查前置
         if (!PropData.CheckPrevProp())
         {
+            // 道具无法使用时的文字
+            string tips = PropData.GetData<string>("prev_comment");
+            if (tips != default(string))
+            {
+                UICommentory.Instance.SetTips(tips);
+            }
+
             Debug.Log("previous prop not exist");
             return;
         }
@@ -79,6 +86,13 @@ public class PropBase : MonoBehaviour
         if(action.Action != null)
         {
             action.Action();
+        }
+
+        // 道具使用完后的文字
+        string tips = PropData.GetData<string>("used_comment");
+        if(tips != default(string))
+        {
+            UICommentory.Instance.SetTips(tips);
         }
 
         m_isUsing = false;
