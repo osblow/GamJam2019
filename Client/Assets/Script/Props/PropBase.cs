@@ -16,16 +16,32 @@ public class PropBase : MonoBehaviour
     
     public void OnPropBeginUsing()
     {
+        if (m_isUsing) return;
+
         Debug.Log("to use prop " + PropId);
+
+        // 检查前置
+        if (!PropData.CheckPrevProp())
+        {
+            Debug.Log("previous prop not exist");
+            return;
+        }
+
+        OnPropUsing();
+        Inventory.Instance.AddProp(PropData);
+
         m_isUsing = true;
     }
 
-    public void OnPropUsing()
+    /// <summary>
+    /// 一般在这里播个动画啥的
+    /// </summary>
+    public virtual void OnPropUsing()
     {
-
+        OnPropEndUsing();
     }
 
-    public void OnPropEndUsing()
+    public virtual void OnPropEndUsing()
     {
         m_isUsing = false;
     }
@@ -90,7 +106,7 @@ public class PropBase : MonoBehaviour
     {
         UIHangerPropBtn hanger = gameObject.AddComponent<UIHangerPropBtn>();
         hanger.Init(c_btnPrefabPath, gameObject, 100);
-        hanger.SetIcon(PropData.GetData<string>("Icon"));
+        hanger.SetIcon(PropData.GetData<string>("icon"));
         hanger.RegisterOnClick(OnPropBeginUsing);
 
         m_uiBtn = hanger.HangObject;

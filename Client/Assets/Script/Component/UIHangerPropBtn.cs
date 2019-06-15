@@ -17,8 +17,17 @@ public class UIHangerPropBtn : UIHanger
 
     public void SetIcon(string iconPath)
     {
+        if(iconPath == null)
+        {
+            return;
+        }
+
         RawImage img = m_button.transform.GetChild(0).GetComponent<RawImage>();
-        img.material.mainTexture = Resources.Load(iconPath) as Texture;
+        Texture newTex = Instantiate<Texture>(Resources.Load(iconPath) as Texture);
+        img.texture = newTex;
+        //Material mat = new Material(img.material);
+        //mat.mainTexture = newTex;
+        //img.material = mat;
     }
 
     public void RegisterOnClick(UnityEngine.Events.UnityAction callback)

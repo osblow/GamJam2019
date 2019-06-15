@@ -4,6 +4,23 @@ using UnityEngine;
 
 public class PropMgr
 {
+    public static PropMgr Instance
+    {
+        get
+        {
+            if(s_ins == null)
+            {
+                s_ins = new PropMgr();
+            }
+
+            return s_ins;
+        }
+    }
+    private static PropMgr s_ins = null;
+    private PropMgr() { }
+
+
+
     public int SceneId; // 每个地图都维护一个道具管理器
 
     private Dictionary<int, PropBase> s_allPropsInScene = new Dictionary<int, PropBase>();
@@ -13,7 +30,7 @@ public class PropMgr
     /// 从配置好的map预设初始化整个图的道具
     /// </summary>
     /// <param name="sceneRoot"></param>
-    public PropMgr(Transform sceneRoot)
+    public void Init(Transform sceneRoot)
     {
         // 遍历整个子树，将所有挂载道具的保存起来
         WalkTransform(sceneRoot, GetPropCom);
