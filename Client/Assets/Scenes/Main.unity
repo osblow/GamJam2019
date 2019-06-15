@@ -1646,6 +1646,7 @@ GameObject:
   - component: {fileID: 1181720511}
   - component: {fileID: 1181720510}
   - component: {fileID: 1181720512}
+  - component: {fileID: 1181720509}
   m_Layer: 0
   m_Name: SceneCamera
   m_TagString: Untagged
@@ -1653,6 +1654,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1181720509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181720508}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f02d9e93a0a45d4a95d3d99b170c98b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: 545ac3f83c54b0540923cda05919b18a, type: 3}
 --- !u!20 &1181720510
 Camera:
   m_ObjectHideFlags: 0
@@ -2386,7 +2400,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -311.2, y: -164}
+  m_AnchoredPosition: {x: -865, y: -164}
   m_SizeDelta: {x: 271, y: 142}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1681767060
