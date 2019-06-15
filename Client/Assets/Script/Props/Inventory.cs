@@ -36,13 +36,24 @@ public class Inventory
     public void AddProp(PropData data)
     {
         m_allProps.Add(data.Id, data);
+
+        if(data.GetData<PropGetAction>("how_to_get") == PropGetAction.INVENTORY)
+        {
+            UIInventory.AddProp(data);
+        }
     }
 
     public void RemoveProp(int id)
     {
         if (m_allProps.ContainsKey(id))
         {
+            PropData data = m_allProps[id];
             m_allProps.Remove(id);
+
+            if (data.GetData<PropGetAction>("how_to_get") == PropGetAction.INVENTORY)
+            {
+                UIInventory.RemoveProp(id);
+            }
         }
     }
 

@@ -53,6 +53,11 @@ public class UIInventory : MonoBehaviour
         m_flyItem.DOMove(endPos, 1.0f);
     }
 
+    public void RemoveProp(int id)
+    {
+
+    }
+
     private static void SetSprite(RawImage img, string path)
     {
         Texture2D tex = Resources.Load(path) as Texture2D;

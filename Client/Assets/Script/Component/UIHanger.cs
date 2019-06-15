@@ -49,6 +49,11 @@ public class UIHanger : MonoBehaviour
 
     public virtual void Init(string hangObjPrefab, GameObject node,float offset = 10f)
     {
+        if(m_UICanvas == null)
+        {
+            Awake();
+        }
+
         if(m_root == null)
         {
             m_root = new GameObject("UIHanger");

@@ -46,7 +46,7 @@ public class AnimateProp : PropBase
 
         // align
         Transform followTrans = transform.Find("follow");
-        hanger.Init(c_btnPrefabPath, followTrans.gameObject, 100);
+        hanger.Init(c_btnPrefabPath, followTrans ? followTrans.gameObject:gameObject, 100);
         hanger.SetIcon(PropData.GetData<string>("icon"));
         hanger.RegisterOnClick(OnPropBeginUsing);
 
