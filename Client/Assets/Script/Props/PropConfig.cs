@@ -162,5 +162,12 @@ class PropConfig
             {"icon", "Sprite/Prop/img_banshou" },
             {"how_to_get", PropGetAction.INVENTORY }, // 
         } },
+        // 心心
+        {209, new Dictionary<string, object>(){
+            {"id", "209" },
+            {"icon", "Sprite/Prop/img_banshou" },
+            {"how_to_get", PropGetAction.SCENE }, // 
+            {"used_action",  new PropAction{Action=delegate(){ ChangeToStage(MainScene.Stage.NormalEnd); } } },
+        } },
     };
 }

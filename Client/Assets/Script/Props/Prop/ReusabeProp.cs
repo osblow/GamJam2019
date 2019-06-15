@@ -30,6 +30,13 @@ public class ReusabeProp : PropBase
             m_isOver = false;
             Inventory.Instance.RemoveProp(PropId);
             m_uiBtn.SetActive(false);
+
+            // 执行动作
+            PropAction action = PropData.GetData<PropAction>("reset_action");
+            if (action.Action != null)
+            {
+                action.Action();
+            }
             return;
         }
 
