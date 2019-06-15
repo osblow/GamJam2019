@@ -23,7 +23,7 @@ public class PropMgr
 
     public int SceneId; // 每个地图都维护一个道具管理器
 
-    private Dictionary<int, PropBase> s_allPropsInScene = new Dictionary<int, PropBase>();
+    private Dictionary<int, PropBase> m_allPropsInScene = new Dictionary<int, PropBase>();
 
 
     /// <summary>
@@ -36,10 +36,20 @@ public class PropMgr
         WalkTransform(sceneRoot, GetPropCom);
     }
 
+    public PropBase GetProp(int id)
+    {
+        if (!m_allPropsInScene.ContainsKey(id))
+        {
+            return null;
+        }
+
+        return m_allPropsInScene[id];
+    }
+
     public void Clear()
     {
         // 
-        s_allPropsInScene.Clear();
+        m_allPropsInScene.Clear();
     }
 
 
@@ -52,7 +62,7 @@ public class PropMgr
             return;
         }
 
-        s_allPropsInScene.Add(com.PropId, com);
+        m_allPropsInScene.Add(com.PropId, com);
     }
 
 

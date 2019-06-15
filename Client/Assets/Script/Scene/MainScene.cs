@@ -81,6 +81,9 @@ public class MainScene:SceneBase
         m_girl = GameObject.Find("MainCanvas/Main/Panel1/NPC/Girl").GetComponent<MapGirlNode>();
 
         AudioManager.Instance.PlayBGM(AudioData.DATA["bg_1"]);
+
+        // 遍历场景内所有道具
+        PropMgr.Instance.Init(m_scene.transform);
     }
 
     public override void Run()
@@ -185,6 +188,10 @@ public class MainScene:SceneBase
             else
             {
                 m_girl.Die();
+
+                // 地上的扳手显示出来
+                PropBase prop = PropMgr.Instance.GetProp(208);
+                prop.gameObject.SetActive(true);
             }
 
         }

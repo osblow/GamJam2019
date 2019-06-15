@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class MapStairsNode : MapNode
 {
+    public int DependsPropId = -1;
+
     UIHanger m_UIHanger;
     Button m_btnClimb;
     GameObject m_upPoint;
@@ -31,6 +33,12 @@ public class MapStairsNode : MapNode
 
     public void SetButtonAble(bool flag)
     {
+        // 如果有依赖的道具，则先背包。若未获得，则始终不可点击
+        if(DependsPropId > 0)
+        {
+            flag = flag && Inventory.Instance.GetProp(DependsPropId) != null;
+        }
+
         m_btnClimb.gameObject.SetActive(flag);
     }
 

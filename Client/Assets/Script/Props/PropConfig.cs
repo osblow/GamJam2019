@@ -96,14 +96,17 @@ class PropConfig
             {"id", "205" },
             {"how_to_get", PropGetAction.SCENE }, // 
             {"used_icon", "Sprite/Prop/hammer3" }, // 使用结束后替换的图标（开关状态转换）
-            {"associated_obj_used_icon", "Sprite/Prop/hammer3" } // 所关联物体在自己使用结束后替换图标(地面上的红绿灯)
+            {"associated_obj_used_icon", "Sprite/Prop/hammer3" }, // 所关联物体在自己使用结束后替换图标(地面上的红绿灯)
+            {"used_action",  new PropAction{Action=delegate(){ ChangeToStage(MainScene.Stage.Stage1); } } },
         } },
         // 消防栓
         {206, new Dictionary<string, object>(){
             {"id", "206" },
+            {"prev_prop", new Dictionary<int, string>(){ {208, ""} } }, // 字符串指向要替换自己的图标或者Prefab路径
             {"how_to_get", PropGetAction.SCENE }, // 
             {"used_icon", "Sprite/Prop/hammer3" }, // 使用结束后替换的图标（开关状态转换）
-            {"associated_obj_used_icon", "Sprite/Prop/hammer3" } // 所关联物体在自己使用结束后替换图标(地面上的红绿灯)
+            {"associated_obj_used_icon", "Sprite/Prop/hammer3" }, // 所关联物体在自己使用结束后替换图标(地面上的红绿灯)
+            {"used_action",  new PropAction{Action=delegate(){ ChangeToStage(MainScene.Stage.Stage2); } } },
         } },
         // 路障，应用时有偏移
         {207, new Dictionary<string, object>(){

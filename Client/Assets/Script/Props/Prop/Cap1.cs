@@ -41,6 +41,8 @@ public class Cap1 : PropBase
 
     private void Update()
     {
+        if (!m_isUsing) return;
+
         if (m_isOver) return;
 
         if(Mathf.Abs(m_car.transform.position.x - transform.position.x) <= 4)
