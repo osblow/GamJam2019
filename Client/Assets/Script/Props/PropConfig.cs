@@ -75,7 +75,7 @@ class PropConfig
         {101, new Dictionary<string, object>(){
             {"id", "101" },
             {"icon", "Sprite/Prop/hammer2" },
-            {"prev_prop", new Dictionary<int, string>(){ {102, ""} } }, // 字符串指向要替换自己的图标或者Prefab路径
+            {"prev_prop", 102}, // 字符串指向要替换自己的图标或者Prefab路径
             {"how_to_get", PropGetAction.SCENE }, // 
         } },
         {102, new Dictionary<string, object>(){
@@ -85,7 +85,7 @@ class PropConfig
         } },
         {103, new Dictionary<string, object>(){
             {"id", "103" },
-            {"prev_prop", new Dictionary<int, string>(){ {101, ""} } },
+            {"prev_prop", 101},
             {"how_to_get", PropGetAction.SCENE }, // 
         } },
         {104, new Dictionary<string, object>(){
@@ -112,8 +112,8 @@ class PropConfig
         {202, new Dictionary<string, object>(){
             {"id", "202" },
             {"icon", "Sprite/Prop/hammer2" },
-            {"used_icon", "Sprite/Prop/hammer3" }, // 使用结束后替换的图标（插了撬棍的井盖）
-            {"prev_prop", new Dictionary<int, string>(){ {201, ""} } }, // 字符串指向要替换自己的图标或者Prefab路径
+            {"used_icon", "Sprite/Prop/lid_with_bar" }, // 使用结束后替换的图标（插了撬棍的井盖）
+            {"prev_prop", 201}, // 字符串指向要替换自己的图标或者Prefab路径
             {"how_to_get", PropGetAction.SCENE }, // 
         } },
         // 第二个撬棍
@@ -124,8 +124,8 @@ class PropConfig
         } },
         // 第二个井盖, 要与第二个撬棍组合
         {204, new Dictionary<string, object>(){
-            {"id", "202" },
-            {"prev_prop", new Dictionary<int, string>(){ {203, ""} } }, // 字符串指向要替换自己的图标或者Prefab路径
+            {"id", "204" },
+            {"prev_prop", 203}, // 字符串指向要替换自己的图标或者Prefab路径
             {"how_to_get", PropGetAction.SCENE }, // 
             {"anim_type", PropAnimationType.ROTATION },
             {"anim_rot", -160f },
@@ -134,27 +134,29 @@ class PropConfig
         {205, new Dictionary<string, object>(){
             {"id", "205" },
             {"how_to_get", PropGetAction.SCENE }, // 
-            {"used_icon", "Sprite/Prop/hammer3" }, // 使用结束后替换的图标（开关状态转换）
-            {"associated_obj_used_icon", "Sprite/Prop/hammer3" }, // 所关联物体在自己使用结束后替换图标(地面上的红绿灯)
+            //{"used_icon", "Sprite/Prop/hammer3" }, // 使用结束后替换的图标（开关状态转换）
+            //{"associated_obj_used_icon", "Sprite/Prop/hammer3" }, // 所关联物体在自己使用结束后替换图标(地面上的红绿灯)
             {"used_action",  new PropAction{Action=delegate(){ ChangeToStage(MainScene.Stage.Stage1); } } },
             {"reset_action",  new PropAction{Action=delegate(){ ResetSwitch(); } } },
         } },
         // 消防栓
         {206, new Dictionary<string, object>(){
             {"id", "206" },
-            {"prev_prop", new Dictionary<int, string>(){ {208, ""} } }, // 字符串指向要替换自己的图标或者Prefab路径
+            {"prev_prop", 208}, // 字符串指向要替换自己的图标或者Prefab路径
             {"how_to_get", PropGetAction.SCENE }, // 
-            {"used_icon", "Sprite/Prop/hammer3" }, // 使用结束后替换的图标（开关状态转换）
-            {"associated_obj_used_icon", "Sprite/Prop/hammer3" }, // 所关联物体在自己使用结束后替换图标(地面上的红绿灯)
+            //{"used_icon", "Sprite/Prop/hammer3" }, // 使用结束后替换的图标（开关状态转换）
+            //{"associated_obj_used_icon", "Sprite/Prop/hammer3" }, // 所关联物体在自己使用结束后替换图标(地面上的红绿灯)
             {"used_action",  new PropAction{Action=delegate(){ ChangeToStage(MainScene.Stage.Stage2); } } },
+            {"anim_type", PropAnimationType.ROTATION },
+            {"anim_rot", 359f },
         } },
         // 路障，应用时有偏移
         {207, new Dictionary<string, object>(){
             {"id", "207" },
             {"how_to_get", PropGetAction.SCENE }, // 
-            {"anim_type", PropAnimationType.OFFSET },
-            {"anim_rot", new UnityEngine.Vector3(0, 50, 0) },
             {"used_action",  new PropAction{Action=delegate(){ HoldStop(); } } },
+            {"anim_type", PropAnimationType.ROTATION },
+            {"anim_rot", -72f },
         } },
         // 扳手
         {208, new Dictionary<string, object>(){
@@ -165,7 +167,7 @@ class PropConfig
         // 心心
         {209, new Dictionary<string, object>(){
             {"id", "209" },
-            {"icon", "Sprite/Prop/img_banshou" },
+            {"icon", "Sprite/Prop/use_love" },
             {"how_to_get", PropGetAction.SCENE }, // 
             {"used_action",  new PropAction{Action=delegate(){ ChangeToStage(MainScene.Stage.NormalEnd); } } },
         } },

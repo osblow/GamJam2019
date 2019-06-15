@@ -135,10 +135,32 @@ public class PropBase : MonoBehaviour
     public const string c_btnPrefabPath = "Prefab/UI/Hanger/HangerPropBtn";
     protected virtual void InitBtn()
     {
-        UIHangerPropBtn hanger = gameObject.AddComponent<UIHangerPropBtn>();
-        hanger.Init(c_btnPrefabPath, gameObject, 100);
-        hanger.SetIcon(PropData.GetData<string>("icon"));
-        hanger.RegisterOnClick(OnPropBeginUsing);
+        UIHangerPropBtn hanger = gameObject.GetComponent<UIHangerPropBtn>();
+        if(hanger == null)
+        {
+            hanger = gameObject.AddComponent<UIHangerPropBtn>();
+            hanger.Init(c_btnPrefabPath, gameObject, 100);
+            hanger.RegisterOnClick(OnPropBeginUsing);
+        }
+
+        if(PropId == 204)
+        {
+            Debug.Log("");
+        }
+
+        // 检查是否有依赖的道具，如果有并且依赖的道具有图标，则显示为该图标
+        string iconPath = "Sprite/Prop/use_normal";
+        int prevId = PropData.GetData<int>("prev_prop");
+        if (prevId != 0)
+        {
+            PropData theData = new PropData(prevId);
+            string thePath = theData.GetData<string>("icon");
+            if (thePath != default(string))
+            {
+                iconPath = thePath;
+            }
+        }
+        hanger.SetIcon(iconPath);
 
         m_uiBtn = hanger.HangObject;
         m_uiBtn.SetActive(false); // 默认隐藏

@@ -40,17 +40,9 @@ public class PropData
     /// <returns></returns>
     public bool CheckPrevProp()
     {
-        Dictionary<int, string> prevProps = GetData<Dictionary<int, string>>("prev_prop");
-        if (prevProps == null) return true;
-        
-        foreach(int prevId in prevProps.Keys)
-        {
-            if(Inventory.Instance.GetProp(prevId) == null)
-            {
-                return false;
-            }
-        }
+        int prevProp = GetData<int>("prev_prop");
+        if (prevProp == 0) return true;
 
-        return true;
+        return Inventory.Instance.GetProp(prevProp) != null;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 
 /// <summary>
@@ -9,6 +10,9 @@ using UnityEngine.UI;
 /// </summary>
 public class ReusabeProp : PropBase
 {
+    public RedGreenLightCtrl RedGreenLightCtrl; // 红绿灯控制器
+    public bool IsWaterFull = false; // 是否水已经漫上来了
+
     Sprite m_savedSprite = null;
 
 
@@ -37,16 +41,48 @@ public class ReusabeProp : PropBase
             {
                 action.Action();
             }
+            // 还原 旋转动画
+            if (PropId == 205 || PropId == 207)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            if (PropId == 205)
+            {
+                SetGreenLight();
+            }
+
             return;
         }
 
         base.OnPropBeginUsing();
+
+        // 使用 旋转动画
+        if (PropId == 205)
+        {
+            // 旋转一定角度开启
+            float rotation = -45f;
+            transform.DORotate(new Vector3(0, 0, rotation), 0.5f);
+            SetGreenLight();
+        }
+        if (PropId == 207)
+        {
+            // 旋转一定角度开启
+            float rotation = -71f;
+            transform.DORotate(new Vector3(0, 0, rotation), 0.5f);
+        }
+
     }
 
     public override void OnPropEndUsing()
     {
         base.OnPropEndUsing();
         m_isOver = true;
+
+        if (PropId == 207)
+        {
+            // 当使用了路牌后，就得一直扶着
+            InputManger.Instance.enabled = false;
+        }
     }
 
 
@@ -77,5 +113,37 @@ public class ReusabeProp : PropBase
         m_uiBtn.SetActive(false);
 
         m_isInTrigger = false;
+    }
+
+
+    private void SetGreenLight()
+    {
+        GreenLightState state = GreenLightState.GREEN;
+
+        // 分为4种情况
+        bool usedSwitch = Inventory.Instance.GetProp(205) != null;
+
+        if (!IsWaterFull && usedSwitch)
+        {
+            // 1. 水没漫上来，使用了开关。此时显示正常红灯
+            state = GreenLightState.RED;
+        }
+        else if (!IsWaterFull && !usedSwitch)
+        {
+            // 2. 水没漫上来，未使用开关。此时显示正常绿灯
+            state = GreenLightState.GREEN;
+        }
+        else if (IsWaterFull && usedSwitch)
+        {
+            // 3. 水漫上来了，使用了开关。此时显示异常红灯
+            state = GreenLightState.RED_WITH_CHAOS;
+        }
+        else
+        {
+            // 4. 水漫上来了，未使用开关。此时显示异常绿灯
+            state = GreenLightState.GREEN_WITH_CHAOS;
+        }
+
+        RedGreenLightCtrl.SetState(state);
     }
 }

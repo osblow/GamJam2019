@@ -47,7 +47,21 @@ public class AnimateProp : PropBase
         // align
         Transform followTrans = transform.Find("follow");
         hanger.Init(c_btnPrefabPath, followTrans ? followTrans.gameObject:gameObject, 100);
-        hanger.SetIcon(PropData.GetData<string>("icon"));
+
+        // 检查是否有依赖的道具，如果有并且依赖的道具有图标，则显示为该图标
+        string iconPath = "Sprite/Prop/use_normal";
+        int prevId = PropData.GetData<int>("prev_prop");
+        if (prevId != 0)
+        {
+            PropData theData = new PropData(prevId);
+            string thePath = theData.GetData<string>("icon");
+            if (thePath != default(string))
+            {
+                iconPath = thePath;
+            }
+        }
+        hanger.SetIcon(iconPath);
+        
         hanger.RegisterOnClick(OnPropBeginUsing);
 
         m_uiBtn = hanger.HangObject;

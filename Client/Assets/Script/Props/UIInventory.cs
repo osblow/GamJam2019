@@ -36,6 +36,7 @@ public class UIInventory : MonoBehaviour
         GameObject newIem = Instantiate(m_itemSample);
         newIem.transform.SetParent(m_gridRoot, false);
         SetSprite(newIem.transform.GetChild(0).GetComponent<RawImage>(), icon);
+        newIem.SetActive(false);
 
         // 飞出来的动画
         m_flyItem.gameObject.SetActive(true);
@@ -49,8 +50,8 @@ public class UIInventory : MonoBehaviour
         GridLayoutGroup grid = m_gridRoot.transform.GetComponent<GridLayoutGroup>();
         int index = newIem.transform.GetSiblingIndex();
         float offsetX = (index + 0.5f) * grid.cellSize.x + Mathf.Max(index - 1, 0) * grid.spacing.x;
-        Vector3 endPos = m_gridRoot.position + new Vector3(offsetX, (grid.cellSize.y + grid.spacing.y) * 0.5f, 0);
-        m_flyItem.DOMove(endPos, 1.0f);
+        Vector3 endPos = m_gridRoot.position;// + new Vector3(offsetX, (grid.cellSize.y + grid.spacing.y) * 0.5f, 0);
+        m_flyItem.DOMove(endPos, 1.0f).onComplete = delegate() { newIem.SetActive(true); };
     }
 
     public void RemoveProp(int id)

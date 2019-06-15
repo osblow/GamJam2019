@@ -126,7 +126,15 @@ public class MainScene:SceneBase
 
     void ResetScene()
     {
-        if(TargetStage != 0 && m_curStage != TargetStage)
+        // 恢复主角行动, 并把路牌还原
+        //InputManger.Instance.enabled = true;
+
+        //if (Inventory.Instance.GetProp(207) != null)
+        //{
+        //    PropMgr.Instance.GetProp(207).OnPropBeginUsing(); // 相当于再点击一次
+        //}
+
+        if (TargetStage != 0 && m_curStage != TargetStage)
         {
             if(TargetStage == Stage.BadEnd || TargetStage == Stage.BadEnd2 || TargetStage == Stage.NormalEnd || TargetStage == Stage.GoodEnd)
             {
