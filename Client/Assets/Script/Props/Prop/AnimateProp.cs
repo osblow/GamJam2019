@@ -14,6 +14,14 @@ public class AnimateProp : PropBase
         m_isOver = true;
 
         DoAction();   
+
+        // 暂时当作：只要把消防栓打开，下面就会淹水，红绿灯会乱掉
+        if(PropId == 206)
+        {
+            ReusabeProp prop = (ReusabeProp)PropMgr.Instance.GetProp(205);
+            prop.IsWaterFull = true;
+            prop.SetGreenLight();
+        }
     }
 
     private void DoAction()

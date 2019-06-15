@@ -116,7 +116,7 @@ public class ReusabeProp : PropBase
     }
 
 
-    private void SetGreenLight()
+    public void SetGreenLight()
     {
         GreenLightState state = GreenLightState.GREEN;
 
