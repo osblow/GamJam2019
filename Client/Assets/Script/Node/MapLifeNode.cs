@@ -10,6 +10,7 @@ public class MapLifeNode : MapNode
         Run,
         Climb,
         Operate,
+        Die,
     }
 
     private int m_curHP = 1;

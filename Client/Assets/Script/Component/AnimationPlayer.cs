@@ -26,6 +26,7 @@ public class AnimationPlayer : MonoBehaviour
         {
             return;
         }
+
         Stop();
         curInfo = info;
         frames = Resources.LoadAll<Sprite>(info.resName);
@@ -52,6 +53,7 @@ public class AnimationPlayer : MonoBehaviour
         {
             return;
         }
+
         Stop();
         frames = Resources.LoadAll<Sprite>(info.resName);
         container.sprite = frames[tick];
@@ -81,6 +83,7 @@ public class AnimationPlayer : MonoBehaviour
         time = 0;
         doAnim = false;
         frameLock = -1;
+        curInfo = null;
         //container.sprite = frames[0];
     }
 

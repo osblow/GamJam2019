@@ -8,18 +8,18 @@ public class MapGirlNode : MapLifeNode
     public float m_moveSpeed = 2f;
 
     AnimationPlayer m_animPlayer;
+    MotionState m_motionState = MotionState.Idle;
 
     void Start()
     {
         m_animPlayer = Util.GetOrAddComponent<AnimationPlayer>(gameObject);
 
-        InitAnimation();
     }
 
 
     void Update()
     {
-        //CheckDistance();
+        UpdateAnimation();
     }
 
     void CheckDistance()
@@ -48,11 +48,26 @@ public class MapGirlNode : MapLifeNode
 
     }
 
-
-    void InitAnimation()
+    void UpdateAnimation()
     {
-        m_animPlayer.Play(AnimationData.DATA["hero_idle"]);
+        if (m_motionState == MotionState.Idle)
+        {
+            m_animPlayer.Play(AnimationData.DATA["hero_idle"]);
+        }
+        else if (m_motionState == MotionState.Die)
+        {
+            m_animPlayer.PlayOneFrame(AnimationData.DATA["hero_jump"],10);
+        }
     }
 
+    public void Die()
+    {
+        m_motionState = MotionState.Die;
+    }
+
+    public void Idle()
+    {
+        m_motionState = MotionState.Idle;
+    }
 }
 

@@ -31,6 +31,7 @@ public class MainScene:SceneBase
     Vector2 m_carStartEndPos;
     //--------------------------------------------------------
 
+    MapGirlNode m_girl;
     //--------------------------------------------------------
 
     public override void Init()
@@ -47,19 +48,21 @@ public class MainScene:SceneBase
         m_carStartOrgPos = m_car.transform.position;
         m_carStartEndPos = new Vector2(m_car.transform.position.x + 10, m_car.transform.position.y);
 
+        m_girl = GameObject.Find("MainCanvas/Main/Panel1/NPC/Girl").GetComponent<MapGirlNode>();
+
         AudioManager.Instance.PlayBGM(AudioData.DATA["bg_1"]);
     }
 
     public override void Run()
     {
+        PlayScene();
         timer += Time.deltaTime;
         if(timer> m_dicStageTime[m_curStage])
         {
             ResetScene();
             timer = 0;
             return;
-        }
-        PlayScene();
+        }  
     }
 
     void ResetScene()
@@ -67,6 +70,7 @@ public class MainScene:SceneBase
         if (m_curStage == Stage.Start)
         {
             m_car.transform.position = m_carStartOrgPos;
+            m_girl.Idle();
         }
     }
 
@@ -79,6 +83,10 @@ public class MainScene:SceneBase
             if (distance > 0.1f)
             {
                 m_car.transform.Translate(new Vector2(1, 0) * 5f * Time.deltaTime);
+            }
+            else
+            {
+                m_girl.Die();
             }
             
         }
