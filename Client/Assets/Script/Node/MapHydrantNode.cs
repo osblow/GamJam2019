@@ -18,5 +18,6 @@ public class MapHydrantNode : MapNode
     {
         m_water.GetComponent<Image>().enabled = true;
         m_animPlayer.Play(AnimationData.DATA["pengshui"]);
+        AudioManager.Instance.PlaySoundByGO(AudioData.DATA["fire_hydrant_water"], gameObject);
     }
 }
