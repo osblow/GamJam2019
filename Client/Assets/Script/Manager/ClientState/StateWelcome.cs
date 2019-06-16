@@ -12,6 +12,7 @@ public class StateWelcome : StateBase
         m_panel = GameObject.Instantiate(m_pre, transCanvas) as GameObject;
 
         m_panel.transform.Find("BtnStart").GetComponent<Button>().onClick.AddListener(OnClickStart);
+        m_panel.transform.Find("BtnStart1").GetComponent<Button>().onClick.AddListener(OnClickStart);
     }
 
     public override void Run()

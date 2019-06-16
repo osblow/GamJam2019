@@ -30,6 +30,17 @@ public class ResultView : MonoBehaviour
         ResultLabels.Add(ResultType.NORMAL, transform.Find("normal_end").gameObject);
     }
 
+    private void OnEnable()
+    {
+        // 遍历所有兄弟节点，隐藏可交互项
+        Transform parent = transform.parent;
+        for(int i=0;i< parent.childCount; ++i)
+        {
+            Transform child = parent.GetChild(i);
+            child.gameObject.SetActive(child.gameObject.name != "UIHanger");
+        }
+    }
+
     public void OnClickConfirm()
     {
         Debug.Log("restart");
