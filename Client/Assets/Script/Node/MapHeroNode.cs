@@ -54,6 +54,13 @@ public class MapHeroNode : MapLifeNode
         {
             return;
         }
+        if (m_motionState == MotionState.Leave)
+        {
+            Vector2 direction = new Vector2(1, 0);
+            SetRigidbodyEnable(false);
+            transform.Translate(direction * m_moveSpeed * Time.deltaTime);
+            return;
+        }
         //爬梯
         if (m_climb_pos != Vector2.zero)
         {
@@ -154,6 +161,10 @@ public class MapHeroNode : MapLifeNode
         else if (m_motionState == MotionState.Operate)
         {
             m_animPlayer.Play(AnimationData.DATA["cat_operate"]);
+        }
+        else if (m_motionState == MotionState.Leave)
+        {
+            m_animPlayer.Play(AnimationData.DATA["cat_run"]);
         }
     }
 
@@ -258,6 +269,11 @@ public class MapHeroNode : MapLifeNode
     {
         m_motionState = MotionState.Operate;
         StartCoroutine(Countdown());
+    }
+
+    public void Leave()
+    {
+        m_motionState = MotionState.Leave;
     }
 
     IEnumerator Countdown()

@@ -19,9 +19,27 @@ public class MapGirlNode : MapLifeNode
 
     void Update()
     {
+        CheckMove();
         UpdateAnimation();
     }
 
+    void CheckMove()
+    {
+        if (m_motionState == MotionState.Die)
+        {
+            return;
+        }
+        if (m_motionState == MotionState.Operate)
+        {
+            return;
+        }
+        if (m_motionState == MotionState.Leave)
+        {
+            Vector2 direction = new Vector2(1, 0);
+            transform.Translate(direction * m_moveSpeed * Time.deltaTime);
+            return;
+        }
+    }
     //void CheckDistance()
     //{
     //    MapNode hero = MapNodeManager.Instance.GetHeroNode();
@@ -70,6 +88,10 @@ public class MapGirlNode : MapLifeNode
         {
             m_animPlayer.Play(AnimationData.DATA["cat_operate"]);
         }
+        else if (m_motionState == MotionState.Leave)
+        {
+            m_animPlayer.Play(AnimationData.DATA["cat_run"]);
+        }
     }
 
     public void Die()
@@ -80,6 +102,11 @@ public class MapGirlNode : MapLifeNode
     public void Idle()
     {
         m_motionState = MotionState.Idle;
+    }
+
+    public void Leave()
+    {
+        m_motionState = MotionState.Leave;
     }
 }
 
