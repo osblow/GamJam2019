@@ -7,9 +7,6 @@ public class StateWelcome : StateBase
     GameObject m_panel = null;
     public override void Start()
     {
-        ClientStateManager.Instance.ChangeState<StatePlay>();
-        return;
-
         Transform transCanvas = GameObject.Find("UICanvas/Top").transform;
         m_pre = Resources.Load("Prefab/UI/Welcome/WekcomePanel");
         m_panel = GameObject.Instantiate(m_pre, transCanvas) as GameObject;
@@ -26,6 +23,9 @@ public class StateWelcome : StateBase
     {
         Debug.Log("game start");
         ClientStateManager.Instance.ChangeState<StatePlay>();
+
+        Mouse mouse = GameObject.Find("MainCanvas/Main/Panel1/Interact/mouse").GetComponent<Mouse>();
+        mouse.Reset();
     }
 
     public override void End()

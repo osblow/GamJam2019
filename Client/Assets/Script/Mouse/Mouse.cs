@@ -14,7 +14,7 @@ public class Mouse : MonoBehaviour
     private const float c_stepInterval2 = 0.5f;
 
     private float m_timer = 0;
-    private int m_step = 0;
+    private int m_step = 3;
 
     public void Reset()
     {
@@ -43,7 +43,7 @@ public class Mouse : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Reset();
+        //Reset();
     }
 
     // Update is called once per frame
