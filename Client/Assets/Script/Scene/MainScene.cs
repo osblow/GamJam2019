@@ -559,15 +559,7 @@ public class MainScene:SceneBase
                     m_steel.transform.Translate(new Vector2(0, -1) * 10f * Time.deltaTime);
                 }
             }
-            //todo 和女主离开动画
-            ((MapHeroNode)MapNodeManager.Instance.GetHeroNode()).Leave();
-            m_girl.Leave();
-
-            // 召唤结束界面
-            TimeMgr.Instance.TimerOnce(2f, delegate () {
-                ResultView.Instance.gameObject.SetActive(true);
-                ResultView.Instance.SetTips("王子与公主的故事总是大团圆结局。所以你的故事并没有结束...");
-            });
+            
         }
 
         if (m_curStage == Stage.GoodEnd)

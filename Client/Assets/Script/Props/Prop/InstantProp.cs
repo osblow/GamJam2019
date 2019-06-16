@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 
 /// <summary>
@@ -14,5 +15,18 @@ class InstantProp : PropBase
         gameObject.SetActive(false);
         m_uiBtn.SetActive(false);
         m_isOver = true;
+
+        if(PropId == 209)
+        {
+            //和女主离开动画
+            ((MapHeroNode)MapNodeManager.Instance.GetHeroNode()).Leave();
+            GameObject.Find("MainCanvas/Main/Panel1/NPC/Girl").GetComponent<MapGirlNode>().Leave();
+
+            // 召唤结束界面
+            TimeMgr.Instance.TimerOnce(2f, delegate () {
+                ResultView.Instance.gameObject.SetActive(true);
+                ResultView.Instance.SetTips("王子与公主的故事总是大团圆结局。所以你的故事并没有结束...");
+            });
+        }
     }
 }
