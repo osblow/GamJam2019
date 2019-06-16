@@ -35,6 +35,11 @@ public class AnimationData
         { "cat_operate",new AnimationInfo("cat_operate","Sprite/Character/cat_anim_2",0,3,1f,true) },
         { "cat_climb",new AnimationInfo("cat_climb","Sprite/Character/cat_anim_1",0,2,0.75f,true) },
         { "cat_die",new AnimationInfo("cat_die","Sprite/Character/cat_anim_1",8,8,0.5f,true) },
+
+        { "cat_idle_m",new AnimationInfo("cat_idle_m","Sprite/Character/cat_anim_3",0,7,2.25f,true) },
+        { "cat_run_m",new AnimationInfo("cat_run_m","Sprite/Character/cat_anim_3",9,12,1f,true,"hero_run") },
+        { "cat_die_m",new AnimationInfo("cat_die_m","Sprite/Character/cat_anim_3",8,8,0.5f,true) },
+
         { "pengshui",new AnimationInfo("pengshui","Sprite/pengshui",0,5,1f,true) },
     };
 }

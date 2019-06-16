@@ -263,6 +263,7 @@ public class MainScene:SceneBase
                 if (timer > 4)
                 {
                     m_car.transform.Translate(new Vector2(1, 0) * 10f * Time.deltaTime);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_drive"], m_car.gameObject);
                 }   
             }
             else
@@ -460,8 +461,12 @@ public class MainScene:SceneBase
                     m_steel.transform.Translate(new Vector2(0, -1) * 10f * Time.deltaTime);
                 }
             }
-            //todo 女主死亡
-            m_girl.Die();
+            else
+            {
+                //todo 女主死亡
+                m_girl.Die();
+            }
+            
         }
 
         if (m_curStage == Stage.BadEnd2)
@@ -501,8 +506,12 @@ public class MainScene:SceneBase
                     m_steel.transform.Translate(new Vector2(0, -1) * 10f * Time.deltaTime);
                 }
             }
-            //todo 女主死亡
-            m_girl.Die();
+            else
+            {
+                //todo 女主死亡
+                m_girl.Die();
+            }
+            
         }
 
         if (m_curStage == Stage.NormalEnd)
