@@ -452,11 +452,13 @@ public class MainScene:SceneBase
                 if (timer > 8)
                 {
                     m_steel.transform.Translate(new Vector2(0, -1) * 10f * Time.deltaTime);
+
+                    // 显示女主头上的离开按钮
+                    PropMgr.Instance.GetProp(209).gameObject.SetActive(true);
                 }
             }
 
-            // 显示女主头上的离开按钮
-            PropMgr.Instance.GetProp(209).gameObject.SetActive(true);
+            
 
             //todo 女主生还
         }
