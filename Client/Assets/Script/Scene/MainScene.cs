@@ -12,9 +12,9 @@ public class MainScene:SceneBase
         Stage2,//用消防栓拦住汽车，两车相撞的状态(女主过马路,取决于红绿灯)
         Stage3,//用消防栓拦住汽车，两车相撞的状态，主角切成绿灯，女主成功过马路
         Stage4,//用消防栓拦住汽车，两车相撞的状态，主角切成红灯灯，女主被砸死的状态
-        BadEnd2,//在开消防栓之后，男主举牌，被右车撞死亡
+        BadEnd2,//在开消防栓之后，男主举牌，被右车撞死亡(即红灯举牌，女主被砸死)
         NormalEnd,//Stage3 跟女主离开，普通结局
-        GoodEnd,//Stage3 主角阻止两车相撞牺牲，结束循环
+        GoodEnd,//Stage3 主角阻止两车相撞牺牲，结束循环(即绿灯举牌，女主存活)
     }
 
     public Stage TargetStage = 0;
@@ -125,6 +125,10 @@ public class MainScene:SceneBase
             m_screenEffectFlag = false;
             m_sceneCamera.transform.GetComponent<ScreenEffect>().enabled = false;
             timer = 0;
+
+            //音效flag重置
+            m_audioCarHitBody = false;
+            m_audioCarHitCar = false;
             return;
         }  
     }
@@ -188,8 +192,7 @@ public class MainScene:SceneBase
         {
             m_car.transform.localPosition = m_carStartOrgPos;
             m_steel.transform.localPosition = m_steelStartOrgPos;
-            m_girl.Idle();
-            m_audioCarHitBody = false;
+            m_girl.Idle(true);
             m_mouse.Reset();
         }
 
@@ -197,7 +200,7 @@ public class MainScene:SceneBase
         {
             m_car.transform.localPosition = m_carStartOrgPos;
             m_steel.transform.localPosition = m_steelStartOrgPos;
-            m_girl.Idle();
+            m_girl.Idle(true);
         }
 
         if (m_curStage == Stage.Stage2)
@@ -205,8 +208,8 @@ public class MainScene:SceneBase
             m_car.transform.localPosition = m_carStartOrgPos;
             m_car2.transform.localPosition = m_car2StartOrgPos;
             m_steel.transform.localPosition = m_steelStartOrgPos;
-            m_girl.Idle();
-            m_audioCarHitCar = false;
+            m_girl.Idle(true);
+            
         }
 
         if (m_curStage == Stage.Stage3)
@@ -214,8 +217,7 @@ public class MainScene:SceneBase
             m_car.transform.localPosition = m_carStartOrgPos;
             m_car2.transform.localPosition = m_car2StartOrgPos;
             m_steel.transform.localPosition = m_steelStartOrgPos;
-            m_girl.Idle(); 
-            m_audioCarHitCar = false;
+            m_girl.Idle(true); 
         }
 
         if (m_curStage == Stage.Stage4)
@@ -223,8 +225,7 @@ public class MainScene:SceneBase
             m_car.transform.localPosition = m_carStartOrgPos;
             m_car2.transform.localPosition = m_car2StartOrgPos;
             m_steel.transform.localPosition = m_steelStartOrgPos;
-            m_girl.Idle();
-            m_audioCarHitCar = false;
+            m_girl.Idle(true);
         }
 
         if (m_curStage == Stage.BadEnd)
@@ -268,7 +269,11 @@ public class MainScene:SceneBase
                 {
                     m_car.transform.Translate(new Vector2(1, 0) * 10f * Time.deltaTime);
                     AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_drive"], m_car.gameObject);
-                }   
+                }
+                if (timer > 4.5)
+                {
+                    m_girl.Cross();
+                }
             }
             else
             {
@@ -397,6 +402,10 @@ public class MainScene:SceneBase
                 if (timer > 4)
                 {
                     m_car.transform.Translate(new Vector2(1, 0) * 10f * Time.deltaTime);
+                }
+                if (timer > 4.5)
+                {
+                    m_girl.Cross();
                 }
             }
 
@@ -530,6 +539,10 @@ public class MainScene:SceneBase
                 {
                     m_car.transform.Translate(new Vector2(1, 0) * 10f * Time.deltaTime);
                 }
+                if (timer > 4.5)
+                {
+                    m_girl.Cross();
+                }
             }
 
             float car2Distance = m_car2Stage2EndPos.x - m_car2.transform.localPosition.x;
@@ -561,6 +574,10 @@ public class MainScene:SceneBase
                 if (timer > 4)
                 {
                     m_car.transform.Translate(new Vector2(1, 0) * 10f * Time.deltaTime);
+                }
+                if (timer > 4.5)
+                {
+                    m_girl.Cross();
                 }
             }
 

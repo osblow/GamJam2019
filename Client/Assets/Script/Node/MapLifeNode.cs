@@ -12,6 +12,7 @@ public class MapLifeNode : MapNode
         Operate,
         Die,
         Leave,
+        Cross,
     }
 
     private int m_curHP = 1;
