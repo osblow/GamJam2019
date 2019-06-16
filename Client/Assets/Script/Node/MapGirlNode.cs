@@ -111,6 +111,10 @@ public class MapGirlNode : MapLifeNode
 
     public void Idle(bool needReset = false)
     {
+        if (m_motionState == MotionState.Leave)
+        {
+            return;
+        }
         m_motionState = MotionState.Idle;
         if (needReset)
         {
@@ -125,6 +129,10 @@ public class MapGirlNode : MapLifeNode
 
     public void Cross()
     {
+        if (m_motionState == MotionState.Leave)
+        {
+            return;
+        }
         m_motionState = MotionState.Cross;
         
     }
