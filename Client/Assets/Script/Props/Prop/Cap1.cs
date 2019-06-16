@@ -27,6 +27,9 @@ public class Cap1 : PropBase
 
         Debug.Log("to use prop " + PropId);
 
+        // 主角动作
+        ((MapHeroNode)MapNodeManager.Instance.GetHeroNode()).Operate();
+
         // 检查前置
         if (!PropData.CheckPrevProp())
         {

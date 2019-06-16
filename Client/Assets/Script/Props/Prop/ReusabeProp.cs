@@ -29,6 +29,9 @@ public class ReusabeProp : PropBase
     {
         if (m_isOver)
         {
+            // 主角动作
+            ((MapHeroNode)MapNodeManager.Instance.GetHeroNode()).Operate();
+
             // 重置状态
             GetComponent<Image>().sprite = m_savedSprite;
             m_isOver = false;
