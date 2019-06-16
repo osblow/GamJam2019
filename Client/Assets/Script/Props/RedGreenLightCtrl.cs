@@ -41,8 +41,8 @@ public class RedGreenLightCtrl : MonoBehaviour
                 break;
             case GreenLightState.GREEN_WITH_CHAOS:
                 GetComponent<Image>().enabled = false;
-                GreenLightMask.SetActive(true);
-                RedLightMask.SetActive(false);
+                GreenLightMask.SetActive(false);
+                RedLightMask.SetActive(true);
                 break;
             default:
                 break;

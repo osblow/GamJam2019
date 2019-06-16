@@ -24,6 +24,9 @@ public class PropBase : MonoBehaviour
 
         Debug.Log("to use prop " + PropId);
 
+        // 主角动作
+        ((MapHeroNode)MapNodeManager.Instance.GetHeroNode()).Operate();
+
         // 检查前置
         if (!PropData.CheckPrevProp())
         {
@@ -48,7 +51,8 @@ public class PropBase : MonoBehaviour
 
         m_isUsing = true;
 
-        m_uiBtn.SetActive(false);
+
+        if (PropId != 209) m_uiBtn.SetActive(false);
         OnPropUsing();
         Inventory.Instance.AddProp(PropData);
     }
@@ -123,7 +127,7 @@ public class PropBase : MonoBehaviour
         // 隐藏操作按钮
         Debug.Log("left prop" + PropId);
 
-        m_uiBtn.SetActive(false);
+        if (PropId != 209) m_uiBtn.SetActive(false);
 
         m_isInTrigger = false;
     }
@@ -181,9 +185,12 @@ public class PropBase : MonoBehaviour
                 iconPath = thePath;
             }
         }
+
+        // 特殊处理一下，如果是最后的心心，使用心的图标
+        if (PropId == 209) iconPath = "Sprite/Prop/use_love";
         hanger.SetIcon(iconPath);
 
         m_uiBtn = hanger.HangObject;
-        m_uiBtn.SetActive(false); // 默认隐藏
+        if (PropId != 209) m_uiBtn.SetActive(false); // 默认隐藏
     }
 }
