@@ -29,10 +29,11 @@ public class AudioData
         { "buttons",new AudioInfo("buttons","Audio/Sound/buttons",true) },
         { "car_drive",new AudioInfo("car_drive","Audio/Sound/car_drive",true) },
         { "walk_ladder",new AudioInfo("walk_ladder","Audio/Sound/walk_ladder",true) },
-        { "metal_drop",new AudioInfo("metal_drop","Audio/Sound/metal_drop") },
-        { "fire_hydrant_water",new AudioInfo("fire_hydrant_water","Audio/Sound/fire_hydrant_water",true) },
+        { "metal_drop",new AudioInfo("metal_drop","Audio/Sound/metal_drop",false,0.9f) },
+        { "fire_hydrant_water",new AudioInfo("fire_hydrant_water","Audio/Sound/fire_hydrant_water",true,0.5f) },
         { "error",new AudioInfo("error","Audio/Sound/error") },
 
         { "bg_1",new AudioInfo("bg_1","Audio/BGM/Family Friendly Halloween",true,0.5f) },
+        { "bgm_logo",new AudioInfo("bgm_logo","Audio/BGM/bgm_logo",true,0.5f) },
     };
 }

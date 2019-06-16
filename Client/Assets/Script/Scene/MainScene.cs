@@ -18,7 +18,7 @@ public class MainScene:SceneBase
     }
 
     public Stage TargetStage = 0;
-    Stage m_curStage = Stage.Start;
+    Stage m_curStage = Stage.GoodEnd;
 
     float timer = 0;
     Dictionary<Stage, float> m_dicStageTime = new Dictionary<Stage, float>()
@@ -54,7 +54,7 @@ public class MainScene:SceneBase
     GameObject m_car2;
     Vector2 m_car2StartOrgPos = new Vector2(817, -164f);
     Vector2 m_car2Stage2EndPos = new Vector2(52, -164f);
-    Vector2 m_car2GoodEndPos = new Vector2(304, -164f);
+    Vector2 m_car2GoodEndPos = new Vector2(360, -164f);
     //--------------------------------------------------------
     GameObject m_steel;
     Vector2 m_steelStartOrgPos = new Vector2(556, 158f);
