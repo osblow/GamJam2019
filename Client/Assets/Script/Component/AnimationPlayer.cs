@@ -35,6 +35,7 @@ public class AnimationPlayer : MonoBehaviour
         speed = info.duration / (info.endFrame - info.startFrame + 1);
         doAnim = true;
         container.sprite = frames[info.startFrame];
+        container.preserveAspect = true;
 
         if (info.soundName != "")
         {

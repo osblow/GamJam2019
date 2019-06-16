@@ -92,6 +92,8 @@ public class MainScene:SceneBase
 
         m_girl = GameObject.Find("MainCanvas/Main/Panel1/NPC/Girl").GetComponent<MapGirlNode>();
 
+        //GameObject.Find("MainCanvas/Main/Panel1/Interact/ImgHydrant").GetComponent<MapHydrantNode>().EnableWaterAnim();
+
         AudioManager.Instance.PlayBGM(AudioData.DATA["bg_1"]);
 
         // 遍历场景内所有道具
@@ -459,6 +461,7 @@ public class MainScene:SceneBase
                 }
             }
             //todo 女主死亡
+            m_girl.Die();
         }
 
         if (m_curStage == Stage.BadEnd2)
@@ -499,6 +502,7 @@ public class MainScene:SceneBase
                 }
             }
             //todo 女主死亡
+            m_girl.Die();
         }
 
         if (m_curStage == Stage.NormalEnd)

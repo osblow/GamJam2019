@@ -35,6 +35,7 @@ public class AnimationData
         { "cat_operate",new AnimationInfo("cat_operate","Sprite/Character/cat_anim_2",0,3,1f,true) },
         { "cat_climb",new AnimationInfo("cat_climb","Sprite/Character/cat_anim_1",0,2,0.75f,true) },
         { "cat_die",new AnimationInfo("cat_die","Sprite/Character/cat_anim_1",8,8,0.5f,true) },
+        { "pengshui",new AnimationInfo("pengshui","Sprite/pengshui",0,5,1f,true) },
     };
 }
 
