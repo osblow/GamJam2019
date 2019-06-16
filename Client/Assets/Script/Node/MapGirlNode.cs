@@ -71,27 +71,19 @@ public class MapGirlNode : MapLifeNode
     {
         if (m_motionState == MotionState.Idle)
         {
-            m_animPlayer.Play(AnimationData.DATA["cat_idle"]);
+            m_animPlayer.Play(AnimationData.DATA["cat_idle_m"]);
         }
         else if (m_motionState == MotionState.Run)
         {
-            m_animPlayer.Play(AnimationData.DATA["cat_run"]);
-        }
-        else if (m_motionState == MotionState.Climb)
-        {
-            m_animPlayer.Play(AnimationData.DATA["cat_climb"]);
+            m_animPlayer.Play(AnimationData.DATA["cat_run_m"]);
         }
         else if (m_motionState == MotionState.Die)
         {
-            m_animPlayer.Play(AnimationData.DATA["cat_die"]);
-        }
-        else if (m_motionState == MotionState.Operate)
-        {
-            m_animPlayer.Play(AnimationData.DATA["cat_operate"]);
+            m_animPlayer.Play(AnimationData.DATA["cat_die_m"]);
         }
         else if (m_motionState == MotionState.Leave)
         {
-            m_animPlayer.Play(AnimationData.DATA["cat_run"]);
+            m_animPlayer.Play(AnimationData.DATA["cat_run_m"]);
         }
     }
 

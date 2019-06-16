@@ -44,7 +44,10 @@ public class AudioManager : MonoBehaviour
         AudioClip clip = Resources.Load<AudioClip>(audio.resName);
         audios.clip = clip;
         audios.loop = audio.loop;
-
+        if (audios.isPlaying)
+        {
+            return;
+        }
         audios.Play();
     }
 
