@@ -65,6 +65,8 @@ public class MainScene:SceneBase
     bool m_screenEffectFlag = false;
 
     //--------------------------------------------------------
+    Mouse m_mouse;
+
     bool m_audioCarHitBody = false;
     bool m_audioCarHitCar = false;
     bool m_audioTimeStretch = false;
@@ -92,6 +94,7 @@ public class MainScene:SceneBase
 
         m_girl = GameObject.Find("MainCanvas/Main/Panel1/NPC/Girl").GetComponent<MapGirlNode>();
 
+        m_mouse = GameObject.Find("MainCanvas/Main/Panel1/Interact/mouse").GetComponent<Mouse>();
         //GameObject.Find("MainCanvas/Main/Panel1/Interact/ImgHydrant").GetComponent<MapHydrantNode>().EnableWaterAnim();
 
         AudioManager.Instance.PlayBGM(AudioData.DATA["bg_1"]);
@@ -187,6 +190,7 @@ public class MainScene:SceneBase
             m_steel.transform.localPosition = m_steelStartOrgPos;
             m_girl.Idle();
             m_audioCarHitBody = false;
+            m_mouse.Reset();
         }
 
         if (m_curStage == Stage.Stage1)

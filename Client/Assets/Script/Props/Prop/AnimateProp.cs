@@ -25,6 +25,14 @@ public class AnimateProp : PropBase
             GameObject.Find("MainCanvas/Main/Panel1/Interact/ImgHydrant").GetComponent<MapHydrantNode>().EnableWaterAnim();
             GameObject.Find("MainCanvas/Main/Panel1/Front/UnderWaterMask").SetActive(true);
         }
+
+        // 井盖打开后，老鼠消失
+        if(PropId == 204)
+        {
+            Mouse mouse = GameObject.Find("MainCanvas/Main/Panel1/Interact/mouse").GetComponent<Mouse>();
+            mouse.End();
+            mouse.gameObject.SetActive(false);
+        }
     }
 
     private void DoAction()

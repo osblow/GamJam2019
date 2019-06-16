@@ -45,7 +45,11 @@ public class ReusabeProp : PropBase
                 action.Action();
             }
             // 还原 旋转动画
-            if (PropId == 205 || PropId == 207)
+            if (PropId == 205)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, -45);
+            }
+            if (PropId == 207)
             {
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
@@ -70,7 +74,7 @@ public class ReusabeProp : PropBase
         if (PropId == 205)
         {
             // 旋转一定角度开启
-            float rotation = -45f;
+            float rotation = 0f;
             transform.DORotate(new Vector3(0, 0, rotation), 0.5f);
             SetGreenLight();
         }
