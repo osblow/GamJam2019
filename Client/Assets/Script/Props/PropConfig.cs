@@ -68,6 +68,8 @@ class PropConfig
             // 3. 消防栓开了，无红绿灯，右车撞死，女主活
             ChangeToStage(MainScene.Stage.GoodEnd);
         }
+
+        PropMgr.Instance.GetProp(209).UIButton.SetActive(false);
     }
 
     private static void UsedGreenLight()

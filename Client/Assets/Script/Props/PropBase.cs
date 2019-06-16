@@ -15,6 +15,7 @@ public class PropBase : MonoBehaviour
 
     public bool IsOver { get { return m_isOver; } }
 
+    public GameObject UIButton { get { return m_uiBtn; } }
     protected GameObject m_uiBtn = null; // 浮在头顶的按钮
     protected bool m_isInTrigger = false; // 是否与主角发生碰撞
     protected bool m_isUsing = false; // 正在使用中，不显示使用的图标
