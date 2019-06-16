@@ -96,6 +96,9 @@ public class ReusabeProp : PropBase
         {
             // 当使用了路牌后，就得一直扶着
             InputManger.Instance.enabled = false;
+
+            // 偷个懒，延迟固定时间弹出结果界面
+            
         }
     }
 

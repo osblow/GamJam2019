@@ -313,10 +313,11 @@ public class MainScene:SceneBase
                     AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_body"], m_car.gameObject);
                     m_audioCarHitBody = true;
                 }
-
-
+                
                 ResultView.Instance.gameObject.SetActive(true);
+                ResultView.Instance.SetTips(ResultType.BAD);
             }
+
         }
 
         if (m_curStage == Stage.Stage1)
@@ -511,6 +512,9 @@ public class MainScene:SceneBase
                     AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_car"], m_car.gameObject);
                     m_audioCarHitCar = true;
                     m_hero.Die(); //男主死亡
+                    
+                    ResultView.Instance.gameObject.SetActive(true);
+                    ResultView.Instance.SetTips(ResultType.BAD);
                 }
             }
 
@@ -596,6 +600,10 @@ public class MainScene:SceneBase
                     AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_car"], m_car.gameObject);
                     m_audioCarHitCar = true;
                     m_hero.Die(); //男主死亡
+
+
+                    ResultView.Instance.gameObject.SetActive(true);
+                    ResultView.Instance.SetTips(ResultType.GOOD);
                 }
             }
 

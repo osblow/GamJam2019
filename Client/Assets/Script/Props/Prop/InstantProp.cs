@@ -25,7 +25,7 @@ class InstantProp : PropBase
             // 召唤结束界面
             TimeMgr.Instance.TimerOnce(2f, delegate () {
                 ResultView.Instance.gameObject.SetActive(true);
-                ResultView.Instance.SetTips("王子与公主的故事总是大团圆结局。所以你的故事并没有结束...");
+                ResultView.Instance.SetTips(ResultType.NORMAL);
             });
         }
     }
