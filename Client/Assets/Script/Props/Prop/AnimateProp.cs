@@ -21,6 +21,8 @@ public class AnimateProp : PropBase
             ReusabeProp prop = (ReusabeProp)PropMgr.Instance.GetProp(205);
             prop.IsWaterFull = true;
             prop.SetGreenLight();
+
+            GameObject.Find("MainCanvas/Main/Panel1/Interact/ImgHydrant").GetComponent<MapHydrantNode>().EnableWaterAnim();
         }
     }
 
