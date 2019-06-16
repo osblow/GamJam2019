@@ -303,6 +303,7 @@ public class MainScene:SceneBase
                 if (timer > 4)
                 {
                     m_car.transform.Translate(new Vector2(1, 0) * 10f * Time.deltaTime);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_drive"], m_car.gameObject);
                 }
             }
             else
@@ -328,7 +329,12 @@ public class MainScene:SceneBase
                 if (timer > 4)
                 {
                     m_car.transform.Translate(new Vector2(1, 0) * 10f * Time.deltaTime);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_drive"], m_car.gameObject);
                 }
+            }
+            else
+            {
+                AudioManager.Instance.StopSoundByGO( m_car.gameObject);
             }
 
             float steelDistance = m_steelStage1EndPos.y - m_steel.transform.localPosition.y;
@@ -342,6 +348,7 @@ public class MainScene:SceneBase
             else
             {
                 m_girl.Die();
+                AudioManager.Instance.PlaySoundByGO(AudioData.DATA["metal_drop"], m_girl.gameObject);
 
                 // 地上的扳手显示出来
                 PropBase prop = PropMgr.Instance.GetProp(208);
@@ -361,7 +368,12 @@ public class MainScene:SceneBase
                 if (timer > 4)
                 {
                     m_car.transform.Translate(new Vector2(1, 0) * 10f * Time.deltaTime);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_drive"], m_car.gameObject);
                 }
+            }
+            else
+            {
+                AudioManager.Instance.StopSoundByGO(m_car.gameObject);
             }
 
             float car2Distance = m_car2Stage2EndPos.x - m_car2.transform.localPosition.x;
@@ -370,13 +382,14 @@ public class MainScene:SceneBase
                 if (timer > 6)
                 {
                     m_car2.transform.Translate(new Vector2(-1, 0) * 10f * Time.deltaTime);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_drive"], m_car2.gameObject);
                 }
             }
             else
             {
                 if (!m_audioCarHitCar)
                 {
-                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_car"], m_car.gameObject);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_car"], m_car2.gameObject);
                     m_audioCarHitCar = true;
                 }
             }
@@ -403,11 +416,16 @@ public class MainScene:SceneBase
                 if (timer > 4)
                 {
                     m_car.transform.Translate(new Vector2(1, 0) * 10f * Time.deltaTime);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_drive"], m_car.gameObject);
                 }
                 if (timer > 4.5)
                 {
                     m_girl.Cross();
                 }
+            }
+            else
+            {
+                AudioManager.Instance.StopSoundByGO(m_car.gameObject);
             }
 
             float car2Distance = m_car2Stage2EndPos.x - m_car2.transform.localPosition.x;
@@ -416,13 +434,14 @@ public class MainScene:SceneBase
                 if (timer > 6)
                 {
                     m_car2.transform.Translate(new Vector2(-1, 0) * 10f * Time.deltaTime);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_drive"], m_car2.gameObject);
                 }
             }
             else
             {
                 if (!m_audioCarHitCar)
                 {
-                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_car"], m_car.gameObject);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_car"], m_car2.gameObject);
                     m_audioCarHitCar = true;
                 }
             }
@@ -450,7 +469,12 @@ public class MainScene:SceneBase
                 if (timer > 4)
                 {
                     m_car.transform.Translate(new Vector2(1, 0) * 10f * Time.deltaTime);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_drive"], m_car.gameObject);
                 }
+            }
+            else
+            {
+                AudioManager.Instance.StopSoundByGO(m_car.gameObject);
             }
 
             float car2Distance = m_car2Stage2EndPos.x - m_car2.transform.localPosition.x;
@@ -459,13 +483,14 @@ public class MainScene:SceneBase
                 if (timer > 6)
                 {
                     m_car2.transform.Translate(new Vector2(-1, 0) * 10f * Time.deltaTime);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_drive"], m_car2.gameObject);
                 }
             }
             else
             {
                 if (!m_audioCarHitCar)
                 {
-                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_car"], m_car.gameObject);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_car"], m_car2.gameObject);
                     m_audioCarHitCar = true;
                 }
             }
@@ -482,6 +507,7 @@ public class MainScene:SceneBase
             {
                 //todo 女主死亡
                 m_girl.Die();
+                AudioManager.Instance.PlaySoundByGO(AudioData.DATA["metal_drop"], m_girl.gameObject); 
             }
             
         }
@@ -494,7 +520,12 @@ public class MainScene:SceneBase
                 if (timer > 4)
                 {
                     m_car.transform.Translate(new Vector2(1, 0) * 10f * Time.deltaTime);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_drive"], m_car.gameObject);
                 }
+            }
+            else
+            {
+                AudioManager.Instance.StopSoundByGO(m_car.gameObject);
             }
 
             float car2Distance = m_car2GoodEndPos.x - m_car2.transform.localPosition.x;
@@ -503,13 +534,14 @@ public class MainScene:SceneBase
                 if (timer > 6)
                 {
                     m_car2.transform.Translate(new Vector2(-1, 0) * 10f * Time.deltaTime);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_drive"], m_car2.gameObject);
                 }
             }
             else
             {
                 if (!m_audioCarHitCar)
                 {
-                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_car"], m_car.gameObject);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_body"], m_car2.gameObject);
                     m_audioCarHitCar = true;
                     m_hero.Die(); //男主死亡
                     
@@ -530,6 +562,7 @@ public class MainScene:SceneBase
             {
                 //todo 女主死亡
                 m_girl.Die();
+                AudioManager.Instance.PlaySoundByGO(AudioData.DATA["metal_drop"], m_girl.gameObject);
             }
             
         }
@@ -542,11 +575,16 @@ public class MainScene:SceneBase
                 if (timer > 4)
                 {
                     m_car.transform.Translate(new Vector2(1, 0) * 10f * Time.deltaTime);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_drive"], m_car.gameObject);
                 }
                 if (timer > 4.5)
                 {
                     m_girl.Cross();
                 }
+            }
+            else
+            {
+                AudioManager.Instance.StopSoundByGO(m_car.gameObject);
             }
 
             float car2Distance = m_car2Stage2EndPos.x - m_car2.transform.localPosition.x;
@@ -555,9 +593,18 @@ public class MainScene:SceneBase
                 if (timer > 6)
                 {
                     m_car2.transform.Translate(new Vector2(-1, 0) * 10f * Time.deltaTime);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_drive"], m_car2.gameObject);
                 }
             }
-            
+            else
+            {
+                if (!m_audioCarHitCar)
+                {
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_car"], m_car2.gameObject);
+                    m_audioCarHitCar = true;
+                }
+            }
+
 
             float steelDistance = m_steelStage1EndPos.y - m_steel.transform.localPosition.y;
             if (steelDistance < -0.1f)
@@ -578,11 +625,16 @@ public class MainScene:SceneBase
                 if (timer > 4)
                 {
                     m_car.transform.Translate(new Vector2(1, 0) * 10f * Time.deltaTime);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_drive"], m_car.gameObject);
                 }
                 if (timer > 4.5)
                 {
                     m_girl.Cross();
                 }
+            }
+            else
+            {
+                AudioManager.Instance.StopSoundByGO(m_car.gameObject);
             }
 
             float car2Distance = m_car2GoodEndPos.x - m_car2.transform.localPosition.x;
@@ -591,13 +643,14 @@ public class MainScene:SceneBase
                 if (timer > 6)
                 {
                     m_car2.transform.Translate(new Vector2(-1, 0) * 10f * Time.deltaTime);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_drive"], m_car2.gameObject);
                 }
             }
             else
             {
                 if (!m_audioCarHitCar)
                 {
-                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_car"], m_car.gameObject);
+                    AudioManager.Instance.PlaySoundByGO(AudioData.DATA["car_hit_body"], m_car2.gameObject);
                     m_audioCarHitCar = true;
                     m_hero.Die(); //男主死亡
 

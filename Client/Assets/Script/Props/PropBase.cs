@@ -38,7 +38,7 @@ public class PropBase : MonoBehaviour
             {
                 UICommentory.Instance.SetTips(tips);
             }
-
+            AudioManager.Instance.PlaySoundByGO(AudioData.DATA["error"], gameObject);
             Debug.Log("previous prop not exist");
             return;
         }
