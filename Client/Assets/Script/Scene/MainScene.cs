@@ -45,7 +45,7 @@ public class MainScene:SceneBase
     //--------------------------------------------------------
     GameObject m_car;
     Vector2 m_carStartOrgPos = new Vector2(-837, -164f);
-    Vector2 m_carStartEndPos = new Vector2(393, -164f);
+    Vector2 m_carStartEndPos = new Vector2(363, -164f);
     Vector2 m_carStage1EndPos = new Vector2(827, -164f);
     Vector2 m_carStage2EndPos = new Vector2(-173, -164f);
     Vector2 m_carGoodEndPos = new Vector2(-173, -164f);

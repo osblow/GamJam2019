@@ -7,7 +7,7 @@ public class MapHeroNode : MapLifeNode
 {
     
 
-    public float m_moveSpeed = 5f;
+    public float m_moveSpeed = 2.5f;
     MotionState m_motionState = MotionState.Idle;
 
     Vector2 m_target_pos = Vector2.zero;

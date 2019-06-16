@@ -10,7 +10,7 @@ public class Mouse : MonoBehaviour
 
     public bool IsOver = false;
 
-    private const float c_stepInterval1 = 2;
+    private const float c_stepInterval1 = 4;
     private const float c_stepInterval2 = 0.5f;
 
     private float m_timer = 0;
