@@ -18,7 +18,7 @@ public class MainScene:SceneBase
     }
 
     public Stage TargetStage = 0;
-    Stage m_curStage = Stage.GoodEnd;
+    Stage m_curStage = Stage.Start;
 
     float timer = 0;
     Dictionary<Stage, float> m_dicStageTime = new Dictionary<Stage, float>()

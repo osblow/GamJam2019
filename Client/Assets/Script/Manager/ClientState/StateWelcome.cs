@@ -13,6 +13,7 @@ public class StateWelcome : StateBase
 
         m_panel.transform.Find("BtnStart").GetComponent<Button>().onClick.AddListener(OnClickStart);
         m_panel.transform.Find("BtnStart1").GetComponent<Button>().onClick.AddListener(OnClickStart);
+        AudioManager.Instance.PlayBGM(AudioData.DATA["bgm_logo"]);
     }
 
     public override void Run()
