@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class MapGirlNode : MapLifeNode
 {
@@ -9,11 +10,14 @@ public class MapGirlNode : MapLifeNode
 
     AnimationPlayer m_animPlayer;
     MotionState m_motionState = MotionState.Idle;
+    Vector2 m_startSize = new Vector3(0.8f, 0.8f, 0.8f);
+    Color m_startColor = new Color(0.7f, 0.7f, 0.7f);
 
     void Start()
     {
         m_animPlayer = Util.GetOrAddComponent<AnimationPlayer>(gameObject);
-
+        transform.localScale = m_startSize;
+        GetComponent<Image>().color = m_startColor;
     }
 
 
@@ -29,10 +33,7 @@ public class MapGirlNode : MapLifeNode
         {
             return;
         }
-        if (m_motionState == MotionState.Operate)
-        {
-            return;
-        }
+
         if (m_motionState == MotionState.Leave)
         {
             Vector2 direction = new Vector2(-1, 0);
@@ -40,6 +41,18 @@ public class MapGirlNode : MapLifeNode
             transform.Translate(direction * m_moveSpeed * Time.deltaTime);
             return;
         }
+        if(m_motionState == MotionState.Cross)
+        {
+            transform.DOScale(new Vector3(1f, 1f, 1f), 2);
+            Tweener twn = GetComponent< Image>().DOColor(new Color(1, 1, 1), 2);
+            twn.SetEase(Ease.Linear);
+            twn.OnComplete(OnCrossComplete);
+        }
+    }
+
+    void OnCrossComplete()
+    {
+        Idle();
     }
     //void CheckDistance()
     //{
@@ -85,6 +98,10 @@ public class MapGirlNode : MapLifeNode
         {
             m_animPlayer.Play(AnimationData.DATA["cat_run_m"]);
         }
+        else if (m_motionState == MotionState.Cross)
+        {
+            m_animPlayer.Play(AnimationData.DATA["cat_run_m"]);
+        }
     }
 
     public void Die()
@@ -92,14 +109,29 @@ public class MapGirlNode : MapLifeNode
         m_motionState = MotionState.Die;
     }
 
-    public void Idle()
+    public void Idle(bool needReset = false)
     {
         m_motionState = MotionState.Idle;
+        if (needReset)
+        {
+            Reset();
+        }
     }
 
     public void Leave()
     {
         m_motionState = MotionState.Leave;
+    }
+
+    public void Cross()
+    {
+        m_motionState = MotionState.Cross;
+        
+    }
+    public void Reset()
+    {
+        transform.localScale = m_startSize;
+        GetComponent<Image>().color = m_startColor;
     }
 }
 
