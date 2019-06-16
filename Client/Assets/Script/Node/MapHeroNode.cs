@@ -58,6 +58,7 @@ public class MapHeroNode : MapLifeNode
         {
             Vector2 direction = new Vector2(1, 0);
             SetRigidbodyEnable(false);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             transform.Translate(direction * m_moveSpeed * Time.deltaTime);
             return;
         }

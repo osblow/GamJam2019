@@ -35,7 +35,8 @@ public class MapGirlNode : MapLifeNode
         }
         if (m_motionState == MotionState.Leave)
         {
-            Vector2 direction = new Vector2(1, 0);
+            Vector2 direction = new Vector2(-1, 0);
+            transform.rotation = Quaternion.Euler(0, 180, 0);
             transform.Translate(direction * m_moveSpeed * Time.deltaTime);
             return;
         }
