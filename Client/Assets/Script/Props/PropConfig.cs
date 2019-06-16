@@ -70,6 +70,39 @@ class PropConfig
         }
     }
 
+    private static void UsedGreenLight()
+    {
+        bool hasDryant = Inventory.Instance.GetProp(206) != null;
+
+        if (hasDryant)
+        {
+            // 1. 有消防栓，红灯。女主被砸死
+            ChangeToStage(MainScene.Stage.Stage4);
+        }
+        else
+        {
+            // 2. 无消防栓，红灯。女主被砸死
+            ChangeToStage(MainScene.Stage.Stage1);
+        }
+    }
+
+    private static void UsedHydrant()
+    {
+        bool usedLight = Inventory.Instance.GetProp(205) != null;
+
+        if (usedLight)
+        {
+            // 1. 有消防栓，红灯。女主被砸死
+            ChangeToStage(MainScene.Stage.Stage4);
+        }
+        else
+        {
+            // 2. 有消防栓，绿灯。女主活
+            ChangeToStage(MainScene.Stage.Stage3);
+        }
+    }
+
+
     public static Dictionary<int, Dictionary<string, object>> S_CONFIGS = new Dictionary<int, Dictionary<string, object>>()
     {
         {101, new Dictionary<string, object>(){
@@ -143,7 +176,7 @@ class PropConfig
             {"how_to_get", PropGetAction.SCENE }, // 
             //{"used_icon", "Sprite/Prop/hammer3" }, // 使用结束后替换的图标（开关状态转换）
             //{"associated_obj_used_icon", "Sprite/Prop/hammer3" }, // 所关联物体在自己使用结束后替换图标(地面上的红绿灯)
-            {"used_action",  new PropAction{Action=delegate(){ ChangeToStage(MainScene.Stage.Stage1); } } },
+            {"used_action",  new PropAction{Action=delegate(){ UsedGreenLight(); } } },
             {"reset_action",  new PropAction{Action=delegate(){ ResetSwitch(); } } },
             {"reset_comment", "又变回绿灯了，小美快过去！不然会被钢管砸到！！！" },
             {"used_comment", "嗯。。。变成红灯了，小美就不会过马路，也不会被车撞到了" }
@@ -155,7 +188,7 @@ class PropConfig
             {"how_to_get", PropGetAction.SCENE }, // 
             //{"used_icon", "Sprite/Prop/hammer3" }, // 使用结束后替换的图标（开关状态转换）
             //{"associated_obj_used_icon", "Sprite/Prop/hammer3" }, // 所关联物体在自己使用结束后替换图标(地面上的红绿灯)
-            {"used_action",  new PropAction{Action=delegate(){ ChangeToStage(MainScene.Stage.Stage2); } } },
+            {"used_action",  new PropAction{Action=delegate(){ UsedHydrant(); } } },
             {"anim_type", PropAnimationType.ROTATION },
             {"anim_rot", 359f },
             {"prev_comment", "已经锈死了，必须找一个扳手" },
