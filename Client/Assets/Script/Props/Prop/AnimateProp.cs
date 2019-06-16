@@ -23,6 +23,7 @@ public class AnimateProp : PropBase
             prop.SetGreenLight();
 
             GameObject.Find("MainCanvas/Main/Panel1/Interact/ImgHydrant").GetComponent<MapHydrantNode>().EnableWaterAnim();
+            GameObject.Find("MainCanvas/Main/Panel1/Front/UnderWaterMask").SetActive(true);
         }
     }
 
